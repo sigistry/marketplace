@@ -1,6 +1,6 @@
 # MCP Server Scorecard Rubric v1.0
 
-ClaudeRegistry grades public Model Context Protocol servers against the MCP
+Sigistry grades public Model Context Protocol servers against the MCP
 2026-07-28 specification and baseline security practice. This rubric is
 versioned and published before any grading; every scorecard names the rubric
 version and the exact commit it graded.

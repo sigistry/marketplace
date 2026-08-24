@@ -1,6 +1,6 @@
-# Contributing to Claude Registry
+# Contributing to Sigistry
 
-Thank you for your interest in contributing to Claude Registry! We're excited to see what plugins you'll create for the Claude Code community.
+Thank you for your interest in contributing to Sigistry! We're excited to see what plugins you'll create for the Claude Code community.
 
 ## How to Submit a Plugin
 
@@ -10,9 +10,9 @@ The registry has three tiers:
 
 - **Listed**: your plugin stays in your own repository and `marketplace.json` points at it (the Git-URL flow below), with no commit pin. It gets structural validation and human review, and users install it directly from your repo. Listed plugins do not carry the verification badge, because nothing pins what the code is: you could change it at any time after review.
 - **Verified at commit** (externally hosted): your plugin stays in your repository, and you also add a commit pin (repo + SHA + path) to `.claude-plugin/external-pins.json`. The verifier clones exactly that commit and runs the full methodology against it. Your badge reads `verified @<short-sha>`, a claim that stays true forever, and a daily drift watchdog flips it to `outdated` the moment your repo HEAD moves past the pin. Re-verify a new version by bumping the pin in a PR.
-- **Verified** (strongest): your plugin is vendored into this repository under `plugins/<your-plugin-name>/` via PR. It must pass the seven-check [verification methodology](https://clauderegistry.com/verification) (manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, no secrets, documentation) plus a human review of hook and agent code. CI re-verifies on every change, so the badge always describes exactly what users install:
+- **Verified** (strongest): your plugin is vendored into this repository under `plugins/<your-plugin-name>/` via PR. It must pass the seven-check [verification methodology](https://sigistry.com/verification) (manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, no secrets, documentation) plus a human review of hook and agent code. CI re-verifies on every change, so the badge always describes exactly what users install:
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/verified.svg)](https://clauderegistry.com/verification)
+[![Verified by Sigistry](https://sigistry.com/badge/verified.svg)](https://sigistry.com/verification)
 
 To go for **Verified**, follow the same steps below, but include your full plugin under `plugins/<your-plugin-name>/` with `"source": "./plugins/your-plugin-name"` in your `marketplace.json` entry, and run the verifier before opening the PR:
 
@@ -292,8 +292,8 @@ Users will automatically get updates when they pull from your plugin repository.
 
 ## Getting Help
 
-- **Questions?** Open a [GitHub Discussion](https://github.com/clauderegistry/marketplace/discussions)
-- **Issues?** Report bugs in [Issues](https://github.com/clauderegistry/marketplace/issues)
+- **Questions?** Open a [GitHub Discussion](https://github.com/sigistry/marketplace/discussions)
+- **Issues?** Report bugs in [Issues](https://github.com/sigistry/marketplace/issues)
 - **Examples?** Check the marketplace.json to see existing plugins and their repository URLs
 
 ## Code of Conduct
@@ -302,4 +302,4 @@ Be respectful, constructive, and collaborative. We're building a community toget
 
 ---
 
-Thank you for contributing to Claude Registry! 🚀
+Thank you for contributing to Sigistry! 🚀

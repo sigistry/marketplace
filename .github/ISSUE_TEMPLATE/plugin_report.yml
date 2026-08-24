@@ -8,7 +8,7 @@ body:
       value: |
         Use this for **non-sensitive** concerns about a listed plugin.
         If the issue is exploitable (credential theft, malicious hooks, prompt injection),
-        report it privately instead: [Report a vulnerability](https://github.com/ClaudeRegistry/marketplace/security/advisories/new).
+        report it privately instead: [Report a vulnerability](https://github.com/Sigistry/marketplace/security/advisories/new).
   - type: input
     id: plugin
     attributes:

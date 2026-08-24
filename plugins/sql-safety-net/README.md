@@ -1,6 +1,6 @@
 # SQL Safety Net
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/sql-safety-net.svg)](https://clauderegistry.com/plugin/sql-safety-net)
+[![Verified by Sigistry](https://sigistry.com/badge/sql-safety-net.svg)](https://sigistry.com/plugin/sql-safety-net)
 
 Static, no-database-connection guardrails for schema and query work, it runs on the migration and ORM files you are already editing, catching the mistakes that cause downtime and slow queries before they ship.
 
@@ -23,11 +23,11 @@ Unlike DB-connected tools (Postgres MCP servers, query optimizers that need `pg_
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install sql-safety-net@clauderegistry
+/plugin install sql-safety-net@sigistry
 ```
 
 ## Commands

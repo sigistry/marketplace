@@ -53,7 +53,7 @@ when appropriate.
 ## Scope
 
 This Code of Conduct applies within all community spaces (this repository, its
-issues, pull requests, and discussions, and the clauderegistry.com site), and
+issues, pull requests, and discussions, and the sigistry.com site), and
 also applies when an individual is officially representing the community in
 public spaces.
 

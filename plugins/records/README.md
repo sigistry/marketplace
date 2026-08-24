@@ -9,7 +9,7 @@
 [![Plugin CI](https://github.com/medvertical/records-agent-tools/actions/workflows/plugin-ci.yml/badge.svg)](https://github.com/medvertical/records-agent-tools/actions/workflows/plugin-ci.yml)
 ![Version](https://img.shields.io/badge/version-0.8.3-blue)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/records.svg)](https://clauderegistry.com/plugin/records)
+[![Verified by Sigistry](https://sigistry.com/badge/records.svg)](https://sigistry.com/plugin/records)
 
 FHIR validation and data-quality workflow skills for Claude Code and Codex.
 
@@ -52,11 +52,11 @@ Or from inside a Claude Code session:
 /plugin install records@medvertical
 ```
 
-Records is also listed as a Verified plugin in the [ClaudeRegistry](https://clauderegistry.com/plugin/records) community marketplace:
+Records is also listed as a Verified plugin in the [Sigistry](https://sigistry.com/plugin/records) community marketplace:
 
 ```text
-/plugin marketplace add clauderegistry/marketplace
-/plugin install records@clauderegistry
+/plugin marketplace add sigistry/marketplace
+/plugin install records@sigistry
 ```
 
 Both install the same plugin. `medvertical/records-agent-tools` remains the canonical source.
@@ -214,7 +214,7 @@ Machine-readable helper output follows the [result contract](./docs/result-contr
 
 The canonical Claude Code and Codex marketplace source is `medvertical/records-agent-tools`. Claude community marketplace submission material lives in [submission.md](./submission.md); the repository remains directly installable before and during directory review.
 
-Records is additionally listed in the ClaudeRegistry community marketplace as a Verified-tier plugin, audited against the [published verification methodology](https://clauderegistry.com/verification). That listing carries a vendored copy, so it follows this repository one release behind until each re-sync lands.
+Records is additionally listed in the Sigistry community marketplace as a Verified-tier plugin, audited against the [published verification methodology](https://sigistry.com/verification). That listing carries a vendored copy, so it follows this repository one release behind until each re-sync lands.
 
 ## Release Notes
 

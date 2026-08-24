@@ -1,17 +1,17 @@
 # Code Auditor Plugin
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/code-auditor.svg)](https://clauderegistry.com/plugin/code-auditor)
+[![Verified by Sigistry](https://sigistry.com/badge/code-auditor.svg)](https://sigistry.com/plugin/code-auditor)
 
 Comprehensive code auditing and assessment plugin for Claude Code with parallel analysis agents, reusable assessment skills, and professional report generation.
 
 ## Installation
 
 ```bash
-# From the Claude Registry marketplace
+# From the Sigistry marketplace
 /plugin marketplace add code-auditor
 
 # Or install directly
-/plugin install https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/code-auditor
+/plugin install https://github.com/Sigistry/marketplace/tree/main/plugins/code-auditor
 ```
 
 ## Quick Start

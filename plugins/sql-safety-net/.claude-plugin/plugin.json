@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Static, no-database-connection guardrails for schema and query work: rewrites unsafe migrations into zero-downtime expand-contract steps, hunts ORM N+1 queries in your diff, interprets pasted EXPLAIN plans, and flags schema anti-patterns.",
   "author": {
-    "name": "Claude Registry SQL Safety Net",
-    "url": "https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/sql-safety-net"
+    "name": "Sigistry SQL Safety Net",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/sql-safety-net"
   },
   "license": "MIT"
 }

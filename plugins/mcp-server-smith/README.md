@@ -1,6 +1,6 @@
 # MCP Server Smith
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/mcp-server-smith.svg)](https://clauderegistry.com/plugin/mcp-server-smith)
+[![Verified by Sigistry](https://sigistry.com/badge/mcp-server-smith.svg)](https://sigistry.com/plugin/mcp-server-smith)
 
 Scaffold, audit, and harden Model Context Protocol servers for the **MCP 2026-07-28** specification, statically, from the files you are already editing. It builds a spec-shaped server from scratch, scores an existing one against the stateless Streamable HTTP core, OAuth 2.1 / OIDC authorization, and versioned extensions, migrates servers off the removed HTTP+SSE transport, and runs a security review that catches the risks unique to agent-invoked servers: confused-deputy, token-passthrough, and prompt-injection.
 
@@ -23,11 +23,11 @@ At the same time, an MCP server is a security surface an AI agent calls on the u
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install mcp-server-smith@clauderegistry
+/plugin install mcp-server-smith@sigistry
 ```
 
 ## Commands

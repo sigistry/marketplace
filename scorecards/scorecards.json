@@ -1,12 +1,12 @@
 {
   "$comment": "MCP server scorecards, graded per scorecards/RUBRIC.md. Each entry describes the pinned commit only. Do not edit by hand without a grading pass.",
   "rubricVersion": "1.0",
-  "rubricUrl": "https://github.com/ClaudeRegistry/marketplace/blob/main/scorecards/RUBRIC.md",
+  "rubricUrl": "https://github.com/Sigistry/marketplace/blob/main/scorecards/RUBRIC.md",
   "servers": {
-    "clauderegistry-catalog": {
-      "name": "ClaudeRegistry Plugin Catalog",
-      "endpoint": "https://clauderegistry.com/mcp",
-      "repo": "ClaudeRegistry/mcp-server",
+    "sigistry-catalog": {
+      "name": "Sigistry Plugin Catalog",
+      "endpoint": "https://sigistry.com/mcp",
+      "repo": "Sigistry/mcp-server",
       "commit": "0f582454819af8587d02d635c881d2666ad12c92",
       "date": "2026-08-06",
       "grade": "A",

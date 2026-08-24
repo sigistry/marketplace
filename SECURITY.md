@@ -1,7 +1,7 @@
 # Security Policy
 
-ClaudeRegistry's whole value is trust: every vendored plugin passes a
-seven-check static verification ([methodology](https://clauderegistry.com/verification))
+Sigistry's whole value is trust: every vendored plugin passes a
+seven-check static verification ([methodology](https://sigistry.com/verification))
 plus human review before it ships. If you find a way that trust can be broken,
 we want to know about it.
 
@@ -19,7 +19,7 @@ Reports are welcome for any of these:
   guarantee.
 - **This repository's scripts and workflows** — anything exploitable in the
   validation or badge-generation tooling.
-- **clauderegistry.com and its MCP server** (`https://clauderegistry.com/mcp`) —
+- **sigistry.com and its MCP server** (`https://sigistry.com/mcp`) —
   XSS via rendered plugin READMEs, badge or verification-state spoofing, or
   MCP server issues.
 
@@ -28,7 +28,7 @@ Reports are welcome for any of these:
 **For vulnerabilities, do not open a public issue.**
 
 Use GitHub's private vulnerability reporting:
-[Report a vulnerability](https://github.com/ClaudeRegistry/marketplace/security/advisories/new).
+[Report a vulnerability](https://github.com/Sigistry/marketplace/security/advisories/new).
 This keeps the report private between you and the maintainers while it is
 triaged and fixed.
 

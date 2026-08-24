@@ -1,9 +1,9 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "clauderegistry",
+  "name": "sigistry",
   "description": "Discover plugins that supercharge your Claude Code workflow with advanced security, architecture, and performance insights",
   "owner": {
-    "name": "Claude Registry"
+    "name": "Sigistry"
   },
   "plugins": [
     {
@@ -11,11 +11,11 @@
       "description": "Comprehensive code auditing and assessment plugin with security, architecture, and performance analysis capabilities",
       "version": "1.0.2",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/code-auditor",
       "category": "auditing",
-      "homepage": "https://clauderegistry.com/plugin/code-auditor",
+      "homepage": "https://sigistry.com/plugin/code-auditor",
       "license": "MIT",
       "keywords": [
         "security",
@@ -50,11 +50,11 @@
       "description": "Intelligent documentation automation plugin for generating, maintaining, and syncing code documentation across your entire codebase",
       "version": "1.0.1",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/doc-generator",
       "category": "documentation",
-      "homepage": "https://clauderegistry.com/plugin/doc-generator",
+      "homepage": "https://sigistry.com/plugin/doc-generator",
       "license": "MIT",
       "keywords": [
         "documentation",
@@ -86,11 +86,11 @@
       "description": "Extract and understand business logic from legacy codebases without documentation or handover. Perfect for inherited projects and undocumented systems.",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/legacy-analyzer",
       "category": "analysis",
-      "homepage": "https://clauderegistry.com/plugin/legacy-analyzer",
+      "homepage": "https://sigistry.com/plugin/legacy-analyzer",
       "license": "MIT",
       "keywords": [
         "business-logic",
@@ -113,11 +113,11 @@
       "description": "Comprehensive test generation and analysis plugin that automates test creation, identifies coverage gaps, and improves test quality across your entire codebase",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/test-generator",
       "category": "testing",
-      "homepage": "https://clauderegistry.com/plugin/test-generator",
+      "homepage": "https://sigistry.com/plugin/test-generator",
       "license": "MIT",
       "keywords": [
         "testing",
@@ -143,11 +143,11 @@
       "description": "Powerful data transformation and processing plugin for converting, validating, and manipulating data across various formats",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/data-converter",
       "category": "data",
-      "homepage": "https://clauderegistry.com/plugin/data-converter",
+      "homepage": "https://sigistry.com/plugin/data-converter",
       "license": "MIT",
       "keywords": [
         "data-transformation",
@@ -171,11 +171,11 @@
       "description": "AI-powered code learning and mentoring system with interactive teaching, code explanations, practice exercises, and educational code reviews",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/code-tutor",
       "category": "education",
-      "homepage": "https://clauderegistry.com/plugin/code-tutor",
+      "homepage": "https://sigistry.com/plugin/code-tutor",
       "license": "MIT",
       "keywords": [
         "learning",
@@ -201,11 +201,11 @@
       "description": "Comprehensive SEO optimization plugin for auditing, optimizing, and reviewing website content for improved search engine performance",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/seo-optimizer",
       "category": "optimization",
-      "homepage": "https://clauderegistry.com/plugin/seo-optimizer",
+      "homepage": "https://sigistry.com/plugin/seo-optimizer",
       "license": "MIT",
       "keywords": [
         "seo",
@@ -232,11 +232,11 @@
       "description": "Benchmark Claude Code plugins by validating structure, reviewing skill quality, and comparing with-skill vs without-skill performance with per-file KEEP/TRIM/DELETE recommendations",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/plugin-benchmarker",
       "category": "optimization",
-      "homepage": "https://clauderegistry.com/plugin/plugin-benchmarker",
+      "homepage": "https://sigistry.com/plugin/plugin-benchmarker",
       "license": "MIT",
       "keywords": [
         "benchmark",
@@ -262,11 +262,11 @@
       "description": "Owns everything around the diff: craft Conventional Commits and PR descriptions, recommend the right semver bump by reasoning about behavioral breaking changes, assemble changelogs from messy history, and guide merge-conflict resolution, rebase planning, and git-history archaeology",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/release-conductor",
       "category": "git",
-      "homepage": "https://clauderegistry.com/plugin/release-conductor",
+      "homepage": "https://sigistry.com/plugin/release-conductor",
       "license": "MIT",
       "keywords": [
         "git",
@@ -302,11 +302,11 @@
       "description": "Triages failing GitHub Actions runs, hardens Dockerfiles, pre-flights Kubernetes manifests before they reach the cluster, and drafts blameless postmortems from incident evidence",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/ci-incident-medic",
       "category": "devops",
-      "homepage": "https://clauderegistry.com/plugin/ci-incident-medic",
+      "homepage": "https://sigistry.com/plugin/ci-incident-medic",
       "license": "MIT",
       "keywords": [
         "devops",
@@ -345,11 +345,11 @@
       "description": "Static, no-database-connection guardrails for schema and query work: rewrites unsafe migrations into zero-downtime expand-contract steps, hunts ORM N+1 queries in your diff, interprets pasted EXPLAIN plans, and flags schema anti-patterns",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/sql-safety-net",
       "category": "database",
-      "homepage": "https://clauderegistry.com/plugin/sql-safety-net",
+      "homepage": "https://sigistry.com/plugin/sql-safety-net",
       "license": "MIT",
       "keywords": [
         "database",
@@ -387,11 +387,11 @@
       "description": "Goes past detecting accessibility and localization issues to fixing them: cross-element ARIA and keyboard-focus remediation, color-contrast rewrites, hardcoded-string extraction, ICU MessageFormat correctness, and RTL readiness",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/a11y-i18n-remediator",
       "category": "accessibility",
-      "homepage": "https://clauderegistry.com/plugin/a11y-i18n-remediator",
+      "homepage": "https://sigistry.com/plugin/a11y-i18n-remediator",
       "license": "MIT",
       "keywords": [
         "accessibility",
@@ -430,11 +430,11 @@
       "description": "Keeps your API and its spec in sync: detects and fixes OpenAPI/GraphQL spec-vs-code drift, hardens endpoints with request validation, RFC 9457 error envelopes and idempotency, guards against breaking changes, and audits job-queue reliability",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/api-contract-keeper",
       "category": "api",
-      "homepage": "https://clauderegistry.com/plugin/api-contract-keeper",
+      "homepage": "https://sigistry.com/plugin/api-contract-keeper",
       "license": "MIT",
       "keywords": [
         "api",
@@ -472,11 +472,11 @@
       "description": "A repo-native toolchain for LLM apps: scaffolds eval suites, red-teams for prompt injection, hardens structured-output reliability, and audits token cost, riding promptfoo/DeepEval/Pydantic rather than replacing them",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/llm-app-hardener",
       "category": "ai",
-      "homepage": "https://clauderegistry.com/plugin/llm-app-hardener",
+      "homepage": "https://sigistry.com/plugin/llm-app-hardener",
       "license": "MIT",
       "keywords": [
         "llm",
@@ -514,11 +514,11 @@
       "description": "Gets an unfamiliar repo running locally by diagnosing and fixing broken setup, decodes opaque build systems, and does task-scoped change localization and end-to-end flow tracing, so you're productive on day one",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/codebase-navigator",
       "category": "onboarding",
-      "homepage": "https://clauderegistry.com/plugin/codebase-navigator",
+      "homepage": "https://sigistry.com/plugin/codebase-navigator",
       "license": "MIT",
       "keywords": [
         "onboarding",
@@ -554,11 +554,11 @@
       "description": "Scaffold, audit, and harden MCP servers for the MCP 2026-07-28 spec: stateless Streamable HTTP core, OAuth 2.1 / OIDC authorization, versioned extensions, tool design, and a security review that catches confused-deputy, token-passthrough, and prompt-injection risks.",
       "version": "1.0.0",
       "author": {
-        "name": "Claude Registry"
+        "name": "Sigistry"
       },
       "source": "./plugins/mcp-server-smith",
       "category": "mcp",
-      "homepage": "https://clauderegistry.com/plugin/mcp-server-smith",
+      "homepage": "https://sigistry.com/plugin/mcp-server-smith",
       "license": "MIT",
       "keywords": [
         "mcp",

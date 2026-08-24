@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Comprehensive test generation and analysis plugin that automates test creation, identifies coverage gaps, and improves test quality across your entire codebase",
   "author": {
-    "name": "Claude Registry Test Generator",
-    "url": "https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/test-generator"
+    "name": "Sigistry Test Generator",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/test-generator"
   },
   "license": "MIT"
 }

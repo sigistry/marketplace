@@ -1,6 +1,6 @@
 # SEO Optimizer
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/seo-optimizer.svg)](https://clauderegistry.com/plugin/seo-optimizer)
+[![Verified by Sigistry](https://sigistry.com/badge/seo-optimizer.svg)](https://sigistry.com/plugin/seo-optimizer)
 
 Comprehensive SEO optimization plugin for Claude Code. Audit, optimize, and review website content for improved search engine performance.
 
@@ -11,11 +11,11 @@ The SEO Optimizer plugin helps developers and content creators implement SEO bes
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install seo-optimizer@clauderegistry
+/plugin install seo-optimizer@sigistry
 ```
 
 ## Usage
@@ -221,7 +221,7 @@ claude plugins enable seo-optimizer
 
 ### Uninstall
 ```bash
-/plugin uninstall seo-optimizer@clauderegistry
+/plugin uninstall seo-optimizer@sigistry
 ```
 
 ## Contributing

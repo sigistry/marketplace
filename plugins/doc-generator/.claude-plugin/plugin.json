@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Intelligent documentation automation plugin with commands for generating docs, agents for autonomous documentation review, and skills for documentation standards knowledge",
   "author": {
-    "name": "Claude Registry Doc Generator",
-    "url": "https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/doc-generator"
+    "name": "Sigistry Doc Generator",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/doc-generator"
   },
   "license": "MIT"
 }

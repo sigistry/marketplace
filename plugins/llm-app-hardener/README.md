@@ -1,6 +1,6 @@
 # LLM App Hardener
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/llm-app-hardener.svg)](https://clauderegistry.com/plugin/llm-app-hardener)
+[![Verified by Sigistry](https://sigistry.com/badge/llm-app-hardener.svg)](https://sigistry.com/plugin/llm-app-hardener)
 
 A repo-native toolchain that hardens LLM apps where they actually live, in your prompts, schemas, and call sites, by scaffolding evals, red-teaming for prompt injection, fixing structured-output reliability, and auditing token cost.
 
@@ -23,11 +23,11 @@ LLM App Hardener does this work directly on your prompts, schemas, and call site
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install llm-app-hardener@clauderegistry
+/plugin install llm-app-hardener@sigistry
 ```
 
 ## Commands

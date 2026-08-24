@@ -1,6 +1,6 @@
 # CI & Incident Medic
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/ci-incident-medic.svg)](https://clauderegistry.com/plugin/ci-incident-medic)
+[![Verified by Sigistry](https://sigistry.com/badge/ci-incident-medic.svg)](https://sigistry.com/plugin/ci-incident-medic)
 
 Fast, checklist-driven triage and hardening for the parts of the delivery pipeline that break most: failing GitHub Actions runs, bloated and root-running Dockerfiles, silently-broken Kubernetes manifests, and the hours lost stitching together a postmortem.
 
@@ -23,11 +23,11 @@ CI & Incident Medic turns each of these into a fast, checklist-driven fix. It cl
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install ci-incident-medic@clauderegistry
+/plugin install ci-incident-medic@sigistry
 ```
 
 ## Commands

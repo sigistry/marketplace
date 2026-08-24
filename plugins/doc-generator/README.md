@@ -1,6 +1,6 @@
 # Doc Generator
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/doc-generator.svg)](https://clauderegistry.com/plugin/doc-generator)
+[![Verified by Sigistry](https://sigistry.com/badge/doc-generator.svg)](https://sigistry.com/plugin/doc-generator)
 
 Intelligent documentation automation plugin for Claude Code with commands for generating docs, agents for autonomous documentation review, and skills for documentation standards knowledge.
 
@@ -21,16 +21,16 @@ Doc Generator solves the #1 developer pain point: documentation. Research shows 
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Doc Generator:
 
 ```bash
-/plugin install doc-generator@clauderegistry
+/plugin install doc-generator@sigistry
 ```
 
 Or use the interactive browser:

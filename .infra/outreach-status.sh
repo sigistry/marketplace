@@ -17,7 +17,7 @@ CAMPAIGNS=(
   "flowforge-skill|wentong2022-arch/flowforge-skill|2|19"
 )
 
-echo "ClaudeRegistry outreach - batch 1"
+echo "Sigistry outreach - batch 1"
 echo "================================="
 
 for c in "${CAMPAIGNS[@]}"; do
@@ -36,15 +36,15 @@ for c in "${CAMPAIGNS[@]}"; do
   fi
 
   # Draft PR on the marketplace: state, draft, CI rollup, non-us comments.
-  pstate=$(gh pr view "$pr" --repo ClaudeRegistry/marketplace --json state,isDraft \
+  pstate=$(gh pr view "$pr" --repo Sigistry/marketplace --json state,isDraft \
     -q '"\(.state)\(if .isDraft then " (draft)" else "" end)"' 2>/dev/null || echo "GONE")
-  pchecks=$(gh pr view "$pr" --repo ClaudeRegistry/marketplace --json statusCheckRollup \
+  pchecks=$(gh pr view "$pr" --repo Sigistry/marketplace --json statusCheckRollup \
     -q '[.statusCheckRollup[]? | .conclusion // .status] | join(",")' 2>/dev/null || echo "-")
-  pcomments=$(gh pr view "$pr" --repo ClaudeRegistry/marketplace --json comments \
+  pcomments=$(gh pr view "$pr" --repo Sigistry/marketplace --json comments \
     -q "[.comments[] | select(.author.login != \"$ME\")] | length" 2>/dev/null || echo 0)
   echo "  PR   marketplace#$pr: $pstate | CI: ${pchecks:--} | replies: $pcomments"
   if [ "${pcomments:-0}" -gt 0 ]; then
-    gh pr view "$pr" --repo ClaudeRegistry/marketplace --json comments \
+    gh pr view "$pr" --repo Sigistry/marketplace --json comments \
       -q ".comments[] | select(.author.login != \"$ME\") | \"    -> @\(.author.login): \(.body | .[0:140])\"" 2>/dev/null || true
   fi
 done

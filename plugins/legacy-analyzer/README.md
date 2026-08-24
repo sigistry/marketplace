@@ -1,6 +1,6 @@
 # Legacy Analyzer
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/legacy-analyzer.svg)](https://clauderegistry.com/plugin/legacy-analyzer)
+[![Verified by Sigistry](https://sigistry.com/badge/legacy-analyzer.svg)](https://sigistry.com/plugin/legacy-analyzer)
 
 Extract and understand business logic from legacy codebases without documentation or handover. Perfect for inherited projects, legacy systems, or undocumented code.
 
@@ -38,16 +38,16 @@ Traditional documentation tools won't help because there's no documentation to m
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Legacy Analyzer:
 
 ```bash
-/plugin install legacy-analyzer@clauderegistry
+/plugin install legacy-analyzer@sigistry
 ```
 
 Or use the interactive browser:

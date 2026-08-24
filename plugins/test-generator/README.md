@@ -1,6 +1,6 @@
 # Test Generator
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/test-generator.svg)](https://clauderegistry.com/plugin/test-generator)
+[![Verified by Sigistry](https://sigistry.com/badge/test-generator.svg)](https://sigistry.com/plugin/test-generator)
 
 Comprehensive test generation and analysis plugin for Claude Code that automates test creation, identifies coverage gaps, and improves test quality across your entire codebase.
 
@@ -20,16 +20,16 @@ Test Generator solves the critical testing challenges developers face: writing c
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Test Generator:
 
 ```bash
-/plugin install test-generator@clauderegistry
+/plugin install test-generator@sigistry
 ```
 
 Or use the interactive browser:

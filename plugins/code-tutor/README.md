@@ -1,6 +1,6 @@
 # Code Tutor
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/code-tutor.svg)](https://clauderegistry.com/plugin/code-tutor)
+[![Verified by Sigistry](https://sigistry.com/badge/code-tutor.svg)](https://sigistry.com/plugin/code-tutor)
 
 AI-powered code learning and mentoring system for Claude Code that helps developers learn through interactive teaching, guided practice, and constructive feedback.
 
@@ -235,16 +235,16 @@ Comprehensive exploration of programming concepts with examples from your codeba
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Code Tutor:
 
 ```bash
-/plugin install code-tutor@clauderegistry
+/plugin install code-tutor@sigistry
 ```
 
 Or use the interactive browser:

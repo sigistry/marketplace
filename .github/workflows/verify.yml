@@ -1,10 +1,10 @@
 name: Verify Plugins
 
-# Runs the ClaudeRegistry verification methodology (scripts/verify-plugins.mjs)
+# Runs the Sigistry verification methodology (scripts/verify-plugins.mjs)
 # against every hosted plugin. Fails the build if any plugin fails a check or
 # if the committed .claude-plugin/verified.json (the source of truth for the
-# clauderegistry.com/badge/<id>.svg badges) is stale.
-# Methodology: https://clauderegistry.com/verification
+# sigistry.com/badge/<id>.svg badges) is stale.
+# Methodology: https://sigistry.com/verification
 
 on:
   workflow_dispatch:

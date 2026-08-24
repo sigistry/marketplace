@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Comprehensive code auditing plugin with parallel security, quality, architecture, performance, and testing agents powered by reusable assessment skills",
   "author": {
-    "name": "Claude Registry Code Auditor",
-    "url": "https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/code-auditor"
+    "name": "Sigistry Code Auditor",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/code-auditor"
   },
   "license": "MIT"
 }

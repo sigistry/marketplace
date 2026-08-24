@@ -1,6 +1,6 @@
 ---
 name: Plugin Submission
-about: Submit a new plugin to Claude Registry
+about: Submit a new plugin to Sigistry
 ---
 
 ## Plugin Information
@@ -17,7 +17,7 @@ about: Submit a new plugin to Claude Registry
 
 ## Tier
 
-See [CONTRIBUTING.md](https://github.com/ClaudeRegistry/marketplace/blob/main/CONTRIBUTING.md) for what each tier means:
+See [CONTRIBUTING.md](https://github.com/Sigistry/marketplace/blob/main/CONTRIBUTING.md) for what each tier means:
 
 - [ ] **Listed** — plugin stays in my repository; this PR adds a `marketplace.json` entry pointing at it
 - [ ] **Verified at commit** — plugin stays in my repository; this PR also pins a commit in `.claude-plugin/external-pins.json`
@@ -45,7 +45,7 @@ See [CONTRIBUTING.md](https://github.com/ClaudeRegistry/marketplace/blob/main/CO
 - [ ] All commands are documented with clear descriptions
 - [ ] Plugin has been tested end-to-end with Claude Code
 - [ ] No secrets, credential harvesting, or undisclosed network calls
-- [ ] Hooks (if any) are advisory and fail-safe (see the [verification methodology](https://clauderegistry.com/verification))
+- [ ] Hooks (if any) are advisory and fail-safe (see the [verification methodology](https://sigistry.com/verification))
 - [ ] README.md included with usage instructions
 - [ ] Dependencies on external paid services are clearly documented
 - [ ] Open source license included (MIT, Apache 2.0, or similar)
@@ -75,4 +75,4 @@ By submitting this PR, I confirm that:
 - I have read and followed the CONTRIBUTING.md guidelines
 - This plugin is my original work or I have permission to distribute it
 - The plugin is free and open source
-- I agree to the Claude Registry terms of distribution
+- I agree to the Sigistry terms of distribution

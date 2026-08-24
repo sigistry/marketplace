@@ -4,7 +4,7 @@ name: External Drift Watch
 # their verified commit pin. If a repo's HEAD has drifted, verified.json is
 # updated (status -> stale) and committed, which downgrades the plugin's
 # badge to "outdated" on the next site deploy.
-# Methodology: https://clauderegistry.com/verification
+# Methodology: https://sigistry.com/verification
 
 on:
   schedule:
@@ -33,7 +33,7 @@ jobs:
       - name: Commit drift status
         run: |
           if ! git diff --quiet; then
-            git config user.name "clauderegistry-bot"
+            git config user.name "sigistry-bot"
             git config user.email "actions@users.noreply.github.com"
             git add .claude-plugin/verified.json
             git commit -m "Drift watch: mark externally-hosted plugins stale"

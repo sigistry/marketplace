@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "AI-powered code learning and mentoring system with interactive teaching, code explanations, practice exercises, and educational code reviews",
   "author": {
-    "name": "Claude Registry Code Tutor",
-    "url": "https://github.com/ClaudeRegistry/marketplace/tree/main/plugins/code-tutor"
+    "name": "Sigistry Code Tutor",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/code-tutor"
   },
   "license": "MIT"
 }

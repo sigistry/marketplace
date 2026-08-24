@@ -12,8 +12,8 @@ body:
         - marketplace.json metadata
         - Verification badge / verified.json
         - Registry scripts or CI
-        - clauderegistry.com website
-        - MCP server (clauderegistry.com/mcp)
+        - sigistry.com website
+        - MCP server (sigistry.com/mcp)
     validations:
       required: true
   - type: input

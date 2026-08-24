@@ -1,6 +1,6 @@
 # Data Converter
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/data-converter.svg)](https://clauderegistry.com/plugin/data-converter)
+[![Verified by Sigistry](https://sigistry.com/badge/data-converter.svg)](https://sigistry.com/plugin/data-converter)
 
 Advanced data transformation and processing plugin for Claude Code that provides powerful querying, filtering, validation, and conversion capabilities for JSON, CSV, XML, YAML, and other data formats.
 
@@ -67,16 +67,16 @@ Data Converter solves the common challenge developers face when working with dat
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Data Converter:
 
 ```bash
-/plugin install data-converter@clauderegistry
+/plugin install data-converter@sigistry
 ```
 
 Or use the interactive browser:

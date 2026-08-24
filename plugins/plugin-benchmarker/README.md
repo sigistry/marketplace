@@ -1,6 +1,6 @@
 # Plugin Benchmarker
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/plugin-benchmarker.svg)](https://clauderegistry.com/plugin/plugin-benchmarker)
+[![Verified by Sigistry](https://sigistry.com/badge/plugin-benchmarker.svg)](https://sigistry.com/plugin/plugin-benchmarker)
 
 Benchmark Claude Code plugins by validating structure, reviewing skill quality, and comparing with-skill vs without-skill performance, then producing actionable per-file KEEP/TRIM/DELETE recommendations.
 
@@ -33,16 +33,16 @@ Install them first:
 
 ## Installation
 
-First, add the Claude Registry marketplace (if you haven't already):
+First, add the Sigistry marketplace (if you haven't already):
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 Then install Plugin Benchmarker:
 
 ```bash
-/plugin install plugin-benchmarker@clauderegistry
+/plugin install plugin-benchmarker@sigistry
 ```
 
 ## Commands

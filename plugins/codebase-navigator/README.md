@@ -1,6 +1,6 @@
 # Codebase Navigator
 
-[![Verified by ClaudeRegistry](https://clauderegistry.com/badge/codebase-navigator.svg)](https://clauderegistry.com/plugin/codebase-navigator)
+[![Verified by Sigistry](https://sigistry.com/badge/codebase-navigator.svg)](https://sigistry.com/plugin/codebase-navigator)
 
 Get an unfamiliar repository running, understood, and ready to change on day one, bootstrap the dev environment, decode the build, find where a change goes, and trace a request end-to-end.
 
@@ -22,11 +22,11 @@ Codebase Navigator handles exactly those orientation tasks. It detects what a re
 ## Installation
 
 ```bash
-/plugin marketplace add clauderegistry/marketplace
+/plugin marketplace add sigistry/marketplace
 ```
 
 ```bash
-/plugin install codebase-navigator@clauderegistry
+/plugin install codebase-navigator@sigistry
 ```
 
 ## Commands

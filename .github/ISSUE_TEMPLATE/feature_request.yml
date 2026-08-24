@@ -10,7 +10,7 @@ body:
       options:
         - Registry / marketplace.json
         - Verification methodology
-        - clauderegistry.com website
+        - sigistry.com website
         - MCP server
         - Docs / contributing flow
     validations:
