@@ -1,5 +1,5 @@
 ---
-name: MCP Tool Design
+name: mcp-tool-design
 description: This skill should be used when the user mentions "MCP tool", "tool design", "tool schema", "inputSchema", "tool annotations", "readOnlyHint", "destructiveHint", "tool description", "resources vs tools", "MCP prompts", or designing the tools/resources/prompts an MCP server exposes to an agent. It provides the design rules for few, powerful, well-schematized tools with accurate annotations and safe errors.
 ---
 

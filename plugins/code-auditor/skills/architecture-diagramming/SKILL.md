@@ -1,5 +1,5 @@
 ---
-name: Architecture Diagramming
+name: architecture-diagramming
 description: This skill should be used when the user asks to "generate architecture diagrams", "create dependency graph", "draw sequence diagram", "visualize system architecture", "C4 model", "Mermaid diagram", "component diagram", "ER diagram", or "data flow diagram". Provides C4 model methodology and Mermaid diagram templates for architecture documentation.
 ---
 

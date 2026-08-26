@@ -1,5 +1,5 @@
 ---
-name: ICU MessageFormat
+name: icu-messageformat
 description: This skill should be used when the user mentions "i18n", "internationalization", "ICU", "MessageFormat", "pluralization", "plural", "plural rules", "selectordinal", "gender select", "translation", "locale", "formatMessage", or getting number/date/plural agreement right across languages. It provides ICU MessageFormat correctness for pluralization, gender/select, and inline formatting.
 ---
 

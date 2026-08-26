@@ -1,5 +1,5 @@
 ---
-name: Assessment Scoring
+name: assessment-scoring
 description: This skill should be used when the user asks to "score a codebase", "rate code quality", "generate assessment score", "calculate weighted score", "final assessment", or when any code-auditor agent needs to produce a scoring summary. Provides the standardized scoring methodology for code assessment reports.
 ---
 

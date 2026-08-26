@@ -1,5 +1,5 @@
 ---
-name: MCP Server Security
+name: mcp-server-security
 description: This skill should be used when the user mentions "MCP security", "MCP server security", "prompt injection", "tool poisoning", "confused deputy", "token passthrough", "MCP threat model", "command injection", "SSRF", "rate limiting MCP", "MCP CORS", or hardening a Model Context Protocol server against attack. It provides the MCP threat model and per-risk mitigations.
 ---
 

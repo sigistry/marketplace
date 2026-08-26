@@ -1,5 +1,5 @@
 ---
-name: MCP 2026-07-28 Spec
+name: mcp-2026-07-28
 description: This skill should be used when the user mentions "MCP 2026-07-28", "MCP spec", "Model Context Protocol spec", "stateless MCP", "Streamable HTTP", "HTTP+SSE", "MCP transport", "MCP lifecycle", "MCP capabilities", "MCP Apps", "MCP Tasks", "versioned extensions", "protocolVersion", or building/upgrading an MCP server to the current spec. It provides the 2026-07-28 stateless core, transport, lifecycle, and versioned-extensions model.
 ---
 

@@ -19,7 +19,7 @@ import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const METHODOLOGY_VERSION = '1.0';
+const METHODOLOGY_VERSION = '1.1';
 
 const read = (p) => fs.readFileSync(p, 'utf8');
 const exists = (p) => fs.existsSync(p);
@@ -262,6 +262,118 @@ function checkSkillStructure(pluginDir) {
     : { status: 'pass', detail: `all ${count} skill(s) have valid SKILL.md and every referenced reference file exists` };
 }
 
+// ---------------------------------------------------------------------------
+// Skill safety (methodology v1.1). A SKILL.md is injected into the agent's
+// context when the skill triggers, which makes skills a prompt-injection
+// vector: a hostile skill can try to override instructions, hide actions from
+// the user, trigger greedily on everything, or ship scripts that exfiltrate.
+// Static heuristics only; the methodology page documents the limits.
+// ---------------------------------------------------------------------------
+
+// Claude Code built-in slash commands a skill must not shadow by name.
+const BUILTIN_COMMANDS = new Set([
+  'help', 'clear', 'compact', 'config', 'cost', 'doctor', 'init', 'login', 'logout',
+  'mcp', 'memory', 'model', 'permissions', 'review', 'security-review', 'status',
+  'vim', 'add-dir', 'agents', 'bug', 'exit', 'export', 'hooks', 'ide', 'resume',
+  'todos', 'plugin', 'rewind', 'context', 'statusline', 'output-style',
+  'terminal-setup', 'install-github-app', 'release-notes', 'pr-comments',
+]);
+
+// Body text of SKILL.md / reference files: patterns that read as instructions
+// TO THE AGENT rather than content FOR THE USER. Documentation that teaches
+// these attacks is exempted by nearby teaching context (same approach as
+// SECRET_PATTERNS below).
+const INJECTION_PATTERNS = [
+  [/ignore (all |any )?(previous|prior|earlier|above) (instructions|directions|context)/i, 'instruction override'],
+  [/disregard (the |your )?(system prompt|instructions|guidelines)/i, 'instruction override'],
+  [/do not (tell|inform|mention|reveal)( this)?( to)? the user/i, 'concealment from user'],
+  [/without (telling|informing|notifying|asking) the user/i, 'concealment from user'],
+  [/(hide|conceal) (this|these instructions|the following) from/i, 'concealment from user'],
+  [/bypass (the )?(permission|approval|confirmation|sandbox|safety)/i, 'guardrail bypass'],
+  [/--dangerously-skip-permissions/, 'guardrail bypass'],
+  [/(upload|send|post|transmit|exfiltrate)\b.{0,60}(https?:\/\/|external server|remote endpoint)/i, 'data exfiltration instruction'],
+];
+
+const TEACHING_CONTEXT = /detect|example|pattern|attack|vulnerab|inject|anti-pattern|scan|flag|check|never|avoid|refuse|malicious/i;
+
+// Scripts shipped inside a skill directory. Skills legitimately write files
+// (unlike hooks), so this list targets exfiltration, hidden payloads, and
+// destruction rather than all side effects.
+const SKILL_SCRIPT_FORBIDDEN = [
+  [/(curl|wget)[^\n|]*\|\s*(ba|z|da)?sh\b/, 'pipes remote content into a shell'],
+  [/base64\s+(-d|--decode)[^\n|]*\|\s*(ba|z)?sh\b/, 'decodes and executes a hidden payload'],
+  [/rm\s+-rf\s+["']?(\/|~|\$HOME)/, 'destructive deletion of home or root'],
+  [/\beval\s+"?\$\(|\beval\s*\(\s*(await\s+)?fetch/, 'evaluates dynamic or downloaded content'],
+  [/\bid_rsa\b|\.aws[\\/]credentials|\.netrc\b/, 'credential file access'],
+  [/(curl|wget|fetch\()[^\n]{0,120}(\$\{?[A-Z_]*(KEY|TOKEN|SECRET|PASSWORD)|process\.env)/i, 'sends environment or credentials to the network'],
+  [/chmod\s+777/, 'world-writable permissions'],
+];
+
+function checkSkillSafety(pluginDir) {
+  const skillsDir = path.join(pluginDir, 'skills');
+  if (!exists(skillsDir)) return { status: 'n/a', detail: 'no skills' };
+  const problems = [];
+  // The plugin's own commands, so a skill cannot shadow them either.
+  const ownCommands = new Set(
+    walk(path.join(pluginDir, 'commands'))
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => f.replace(/\.md$/, '').split('/').pop())
+  );
+  let count = 0;
+  for (const e of fs.readdirSync(skillsDir, { withFileTypes: true })) {
+    if (!e.isDirectory()) continue;
+    count++;
+    const skillDir = path.join(skillsDir, e.name);
+    const sk = path.join(skillDir, 'SKILL.md');
+    if (!exists(sk)) continue; // skill-structure already fails this
+    const src = read(sk);
+    const fm = frontmatter(src) ?? {};
+
+    // -- Name discipline: matches directory, safe charset, shadows nothing.
+    if (fm.name && fm.name !== e.name)
+      problems.push(`${e.name}: frontmatter name "${fm.name}" != directory name`);
+    if (fm.name && !/^[a-z0-9-]+$/.test(fm.name))
+      problems.push(`${e.name}: name must be lowercase alphanumeric with hyphens`);
+    const skillName = fm.name || e.name;
+    if (BUILTIN_COMMANDS.has(skillName))
+      problems.push(`${e.name}: shadows built-in Claude Code command "/${skillName}"`);
+    if (ownCommands.has(skillName))
+      problems.push(`${e.name}: shadows this plugin's own command "/${skillName}"`);
+
+    // -- Trigger honesty: a description that claims everything triggers on
+    //    everything, hijacking context on unrelated requests.
+    const desc = fm.description ?? '';
+    if (desc && desc.length < 20) problems.push(`${e.name}: description too thin to scope the trigger`);
+    if (/always (use|invoke|apply|load) (this|the) skill|\bon every (request|message|task|prompt)\b|for (all|every) (task|request|message)s?\b|regardless of (the )?(task|topic|request)/i.test(desc))
+      problems.push(`${e.name}: greedy trigger — description claims all requests`);
+
+    // -- Injection patterns in every markdown file the skill ships.
+    for (const f of walk(skillDir).filter((f) => f.endsWith('.md'))) {
+      const body = read(path.join(skillDir, f));
+      for (const [re, label] of INJECTION_PATTERNS) {
+        const m = body.match(re);
+        if (m && !TEACHING_CONTEXT.test(body.slice(Math.max(0, m.index - 120), m.index + m[0].length + 120))) {
+          problems.push(`${e.name}/${f}: ${label} ("${m[0].slice(0, 60)}")`);
+        }
+      }
+    }
+
+    // -- Script safety for everything executable the skill ships.
+    for (const f of walk(skillDir).filter((f) => /\.(sh|bash|zsh|mjs|js|cjs|ts|py|rb|ps1)$/.test(f))) {
+      const body = read(path.join(skillDir, f));
+      for (const [re, label] of SKILL_SCRIPT_FORBIDDEN) {
+        if (re.test(body)) problems.push(`${e.name}/${f}: ${label}`);
+      }
+    }
+  }
+  return problems.length
+    ? { status: 'fail', detail: problems.join('; ') }
+    : {
+        status: 'pass',
+        detail: `all ${count} skill(s): no command shadowing, scoped triggers, no injection patterns, no unsafe scripts`,
+      };
+}
+
 // A "real" private key has a base64 body after the header; a bare header line
 // in documentation (teaching detection patterns) is not a leak.
 const SECRET_PATTERNS = [
@@ -312,6 +424,7 @@ const CHECKS = [
   ['agent-tool-scope', 'Agent tool scopes', checkAgentToolScope],
   ['command-hygiene', 'Command hygiene', checkCommandHygiene],
   ['skill-structure', 'Skill structure', checkSkillStructure],
+  ['skill-safety', 'Skill safety', checkSkillSafety],
   ['no-secrets', 'No secrets', checkNoSecrets],
   ['docs', 'Documentation', checkDocs],
 ];

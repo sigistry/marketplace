@@ -1,5 +1,5 @@
 ---
-name: Mermaid Diagrams
+name: mermaid-diagrams
 description: This skill should be used when the user asks to "create a diagram", "generate a flowchart", "add a sequence diagram", "visualize architecture", "create an ER diagram", "draw a state machine", "add mermaid diagram", "diagram the data model", "show the workflow", or "map out the process". Provides Mermaid diagram syntax knowledge, diagram type selection guidance, and visual conventions for generating clear, well-structured diagrams from code or requirements.
 version: 1.0.0
 ---

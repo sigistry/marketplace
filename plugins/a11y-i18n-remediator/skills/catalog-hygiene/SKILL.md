@@ -1,5 +1,5 @@
 ---
-name: Catalog Hygiene
+name: catalog-hygiene
 description: This skill should be used when the user mentions "translation catalog", "i18n keys", "missing translations", "unused keys", "untranslated", "locale files", "message catalog", "RTL", "right to left", "logical properties", "bidi", or auditing/cleaning translation files and preparing a UI for right-to-left languages. It provides the methodology for keeping catalogs healthy and making layouts direction-agnostic.
 ---
 

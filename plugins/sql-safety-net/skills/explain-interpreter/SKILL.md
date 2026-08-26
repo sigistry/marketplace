@@ -1,5 +1,5 @@
 ---
-name: Explain Interpreter
+name: explain-interpreter
 description: This skill should be used when the user mentions "EXPLAIN", "explain analyze", "query plan", "slow query", "seq scan", "sequential scan", "nested loop", "index scan", "query optimization", "buffers", "why is this query slow", or pastes a query plan to interpret. It provides a methodology for reading Postgres and MySQL query plans and turning them into concrete index or rewrite recommendations.
 ---
 

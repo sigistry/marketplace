@@ -1,5 +1,5 @@
 ---
-name: Dockerfile Smells and Hardening
+name: dockerfile-smells
 description: This skill should be used when the user mentions "Dockerfile", "docker image size", "container security", "multi-stage build", "distroless", "run as root", "docker layer caching", or is reviewing/optimizing a container image. It provides a catalog of Dockerfile anti-patterns and the hardening principles that fix them.
 ---
 

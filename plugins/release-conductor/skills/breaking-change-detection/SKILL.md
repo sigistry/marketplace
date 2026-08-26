@@ -1,5 +1,5 @@
 ---
-name: Breaking Change Detection
+name: breaking-change-detection
 description: This skill should be used when the user mentions "breaking change", "semver", "semantic versioning", "major minor patch", "version bump", "backward compatible", "API compatibility", or "deprecation". Provides a decision matrix and per-ecosystem signals for reasoning about behavioral (not just syntactic) breaking changes.
 ---
 

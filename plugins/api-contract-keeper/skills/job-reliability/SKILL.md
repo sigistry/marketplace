@@ -1,5 +1,5 @@
 ---
-name: Job Reliability
+name: job-reliability
 description: This skill should be used when the user mentions "background jobs", "queue", "worker", "dead letter", "DLQ", "retry", "at-least-once", "exactly once", "outbox", "idempotent consumer", "visibility timeout", "BullMQ", "Celery", "Sidekiq", "SQS", "Pub/Sub", "Kafka", or "RabbitMQ", or auditing background-job/message-consumer code for reliability. It provides at-least-once handling patterns, DLQ/backoff/visibility recipes per broker, and message-deduplication strategies.
 ---
 

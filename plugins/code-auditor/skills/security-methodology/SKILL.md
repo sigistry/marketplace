@@ -1,5 +1,5 @@
 ---
-name: Security Methodology
+name: security-methodology
 description: This skill should be used when the user mentions "OWASP", "CWE", "CVE", "security compliance", "security scoring", "security maturity model", "vulnerability classification", "risk rating", or "dependency vulnerability scanning". Provides security assessment frameworks and vulnerability classification methodology.
 ---
 

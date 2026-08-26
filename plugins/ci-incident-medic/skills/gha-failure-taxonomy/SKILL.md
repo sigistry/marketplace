@@ -1,5 +1,5 @@
 ---
-name: GitHub Actions Failure Taxonomy
+name: gha-failure-taxonomy
 description: This skill should be used when the user mentions "github actions failing", "CI failure", "workflow failed", "actions permission denied", "secret not found", "matrix", "cache miss", "GITHUB_TOKEN", "pipeline red", or is diagnosing a red GitHub Actions run. It provides a taxonomy of failure classes with log signals, root causes, and exact YAML fixes.
 ---
 

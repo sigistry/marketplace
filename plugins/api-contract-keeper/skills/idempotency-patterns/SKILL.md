@@ -1,5 +1,5 @@
 ---
-name: Idempotency Patterns
+name: idempotency-patterns
 description: This skill should be used when the user mentions "idempotency", "idempotency key", "retries", "exactly once", "double charge", "pagination", "cursor", "offset", "rate limit", "rate limiting", "Retry-After", "safe retries", or making an unsafe HTTP method safe to retry. It provides idempotency-key store recipes, safe-retry semantics for POST/PATCH/DELETE, and cursor/offset pagination plus standard rate-limit headers.
 ---
 

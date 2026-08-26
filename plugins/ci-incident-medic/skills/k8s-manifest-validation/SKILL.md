@@ -1,5 +1,5 @@
 ---
-name: Kubernetes Manifest Validation
+name: k8s-manifest-validation
 description: This skill should be used when the user mentions "kubernetes manifest", "k8s yaml", "deployment not ready", "pod crashloop", "resource limits", "liveness readiness probe", "securityContext", or "helm values", or is validating manifests before deploy. It provides the silent failure modes of K8s manifests plus a PASS/WARN/FAIL validation checklist.
 ---
 

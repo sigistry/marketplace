@@ -1,5 +1,5 @@
 ---
-name: OWASP LLM Top 10
+name: owasp-llm-top10
 description: This skill should be used when the user mentions "prompt injection", "jailbreak", "owasp llm", "llm security", "guardrails", "data exfiltration", "insecure output", "tool abuse", "indirect injection", or "is this agent safe". It provides the OWASP Top 10 for LLM Applications mapped to code-level signals, plus a library of concrete attack strings to test against.
 ---
 

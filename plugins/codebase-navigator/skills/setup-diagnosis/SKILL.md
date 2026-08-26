@@ -1,5 +1,5 @@
 ---
-name: Setup Diagnosis
+name: setup-diagnosis
 description: This skill should be used when the user mentions "setup", "getting started", "install dependencies", "dev environment", "onboarding", "won't run", "version mismatch", "devcontainer", "env vars", "works on my machine", or a failing local install/build. It maps where a repo declares its runtime needs and how to diagnose and fix the common setup failures that block a green build on day one.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: Prompt Versioning Hygiene
+name: prompt-versioning-hygiene
 description: This skill should be used when the user mentions "prompt engineering", "prompt versioning", "prompt management", "system prompt", "prompt template", "manage prompts", or "prompts scattered in code". It provides a methodology for treating prompts as versioned, reviewable, testable code rather than magic strings buried in application logic.
 ---
 

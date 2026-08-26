@@ -1,5 +1,5 @@
 ---
-name: MCP Authorization
+name: mcp-authorization
 description: This skill should be used when the user mentions "MCP auth", "MCP OAuth", "MCP authorization", "OAuth 2.1", "OIDC", "access token validation", "audience", "resource server", "protected resource metadata", "token passthrough", "confused deputy", "Entra", "Okta", or securing a remote MCP server's identity and access. It provides the 2026-07-28 OAuth 2.1 / OIDC model for MCP servers as OAuth resource servers.
 ---
 

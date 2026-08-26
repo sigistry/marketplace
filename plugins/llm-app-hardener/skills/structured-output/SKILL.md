@@ -1,5 +1,5 @@
 ---
-name: Structured Output
+name: structured-output
 description: This skill should be used when the user mentions "structured output", "json mode", "tool schema", "function calling", "json parse error", "response_format", "pydantic ai", "invalid json from the model", or "the model's JSON keeps breaking". It provides a methodology for getting reliably valid, schema-conformant structured output from LLMs across providers, plus a validate-and-retry fallback.
 ---
 

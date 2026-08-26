@@ -1,5 +1,5 @@
 ---
-name: Documentation Standards
+name: documentation-standards
 description: This skill should be used when the user asks to "document code", "add documentation", "write docstrings", "add JSDoc", "fix documentation", "update docs", "check documentation quality", "add doc comments", or "generate API docs". Provides language-specific documentation format knowledge and quality standards for generating, updating, and auditing code documentation.
 version: 1.0.0
 ---

@@ -1,5 +1,5 @@
 ---
-name: Safe Migrations
+name: safe-migrations
 description: This skill should be used when the user mentions "migration", "schema change", "zero downtime", "add column", "alter table", "add index", "lock", "expand contract", "backfill", "ALTER COLUMN", "NOT NULL", "CREATE INDEX", or rewriting a DDL change to avoid downtime. It provides the expand-contract (parallel-change) methodology and a per-dialect catalog of which DDL operations take blocking locks and their safe alternatives.
 ---
 

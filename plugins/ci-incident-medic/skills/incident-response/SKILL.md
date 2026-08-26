@@ -1,5 +1,5 @@
 ---
-name: Incident Response and Blameless Postmortems
+name: incident-response
 description: This skill should be used when the user mentions "postmortem", "incident", "root cause analysis", "blameless", "severity", "SEV1", "on-call", "RCA", or "outage", or is writing up an incident. It provides a blameless postmortem methodology, a severity model, and reliability metric definitions.
 ---
 

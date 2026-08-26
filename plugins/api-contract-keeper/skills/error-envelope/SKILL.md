@@ -1,5 +1,5 @@
 ---
-name: Error Envelope
+name: error-envelope
 description: This skill should be used when the user mentions "error handling", "problem details", "rfc 9457", "rfc 7807", "request validation", "api errors", "zod", "pydantic", "class-validator", "error response format", "problem+json", "validation error", or making an API return consistent, machine-readable errors. It provides the RFC 9457 Problem Details envelope and idiomatic per-stack request-validation patterns.
 ---
 

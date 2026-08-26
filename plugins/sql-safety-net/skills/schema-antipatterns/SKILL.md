@@ -1,5 +1,5 @@
 ---
-name: Schema Antipatterns
+name: schema-antipatterns
 description: This skill should be used when the user mentions "schema design", "database anti-pattern", "N+1", "foreign key index", "normalization", "data types", "constraints", "ORM performance", "missing primary key", "VARCHAR 255", "boolean as int", or reviewing DDL/models for design problems. It provides a relational schema design anti-pattern catalog plus a per-ORM N+1 pattern library.
 ---
 

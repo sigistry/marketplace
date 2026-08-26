@@ -1,5 +1,5 @@
 ---
-name: Changelog Assembly
+name: changelog-assembly
 description: This skill should be used when the user mentions "changelog", "release notes", "keep a changelog", "conventional commits", "commit message", "what changed", or "release summary". Provides a standardized methodology to turn raw, possibly non-conventional git history into human-readable changelogs and release notes.
 ---
 

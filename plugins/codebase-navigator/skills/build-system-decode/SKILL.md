@@ -1,5 +1,5 @@
 ---
-name: Build System Decode
+name: build-system-decode
 description: This skill should be used when the user mentions "build system", "Makefile", "Bazel", "Gradle", "Maven", "Nx", "Turborepo", "monorepo", "build targets", "how to build", "which command", "build one package", or "affected/changed projects". It provides a methodology for reading and driving common build systems and monorepos, listing targets, reading the dependency graph, and building or testing a single package without building the world.
 ---
 

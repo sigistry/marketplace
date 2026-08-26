@@ -1,5 +1,5 @@
 ---
-name: OpenAPI Drift
+name: openapi-drift
 description: This skill should be used when the user mentions "openapi", "swagger", "spec drift", "api contract", "breaking change", "oasdiff", "graphql schema", "api versioning", "the docs don't match the code", "requestBody", "response schema", or reconciling an API specification with its handler code. It provides a static methodology for detecting spec-vs-code drift across web frameworks and for classifying changes as breaking or non-breaking with oasdiff-style semantics.
 ---
 

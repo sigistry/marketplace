@@ -1,5 +1,5 @@
 ---
-name: Eval Authoring
+name: eval-authoring
 description: This skill should be used when the user mentions "llm eval", "evaluation", "promptfoo", "deepeval", "regression test", "llm judge", "golden dataset", "eval suite", "test a prompt", or wants to prove a prompt/model change improved rather than regressed behavior. It provides a standardized methodology for authoring assertion-based, LLM-as-judge, and golden-dataset eval suites that gate CI.
 ---
 

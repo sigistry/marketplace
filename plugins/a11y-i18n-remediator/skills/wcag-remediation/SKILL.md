@@ -1,5 +1,5 @@
 ---
-name: WCAG Remediation
+name: wcag-remediation
 description: This skill should be used when the user mentions "accessibility", "a11y", "WCAG", "ARIA", "screen reader", "keyboard navigation", "focus", "focus trap", "color contrast", "alt text", "aria-label", "aria-expanded", "accessible name", or making a component usable by assistive technology. It provides the WCAG 2.2 remediation methodology and the cross-element fixes that automated tools miss.
 ---
 
