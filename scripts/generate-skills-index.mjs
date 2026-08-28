@@ -51,6 +51,9 @@ for (const entry of marketplace.plugins) {
       pluginCategory: entry.category ?? null,
       status: v?.status ?? 'unknown',
       verifiedDate: v?.date ?? null,
+      // Repo-relative path to the skill directory; the website fetches
+      // <raw>/<path>/SKILL.md for the detail page and copy-skill feature.
+      path: `${entry.source.replace(/^\.\//, '')}/skills/${e.name}`,
     });
   }
 }
