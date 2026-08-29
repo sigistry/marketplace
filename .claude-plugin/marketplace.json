@@ -680,6 +680,31 @@
         "workflow"
       ],
       "strict": false
+    },
+    {
+      "name": "planning-with-files",
+      "description": "Persistent file-based planning for AI coding agents. Crash-proof markdown plans (task_plan.md, findings.md, progress.md) that survive context loss and /clear, with an opt-in completion gate and multi-agent shared state. Works with Claude Code and 60+ agents via the SKILL.md standard; includes Arabic, German, Spanish, and Chinese variants.",
+      "version": "3.11.2",
+      "author": {
+        "name": "OthmanAdi",
+        "url": "https://github.com/OthmanAdi"
+      },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/OthmanAdi/planning-with-files.git"
+      },
+      "category": "productivity",
+      "license": "MIT",
+      "keywords": [
+        "planning",
+        "workflow",
+        "markdown",
+        "context-engineering",
+        "coding-agent",
+        "ai-agents",
+        "claude-code",
+        "skills"
+      ]
     }
   ]
 }
