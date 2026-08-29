@@ -1,7 +1,13 @@
 // Pre-screen external skill repos against the Sigistry skill-safety patterns
-// (mirrors marketplace scripts/verify-plugins.mjs checkSkillSafety, adapted to
-// arbitrary repo layouts: scans every *.md as potential skill content and every
-// script file). Findings only; consent-first means we report, not vendor.
+// (mirrors scripts/verify-plugins.mjs checkSkillSafety, adapted to arbitrary
+// repo layouts: scans every *.md as potential skill content and every script
+// file). Findings only; consent-first means we report, not vendor.
+//
+// v1.2: forbidden-pattern matches inside security-detector definitions or
+// test fixtures are safety code, not attacks - they are classified and
+// reported as accepted context instead of flagged (planning-with-files#230).
+//
+// Usage: node prescreen-skills.mjs path/to/cloned-repo
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -27,6 +33,21 @@ const SCRIPT_FORBIDDEN = [
 ];
 const GREEDY = /always (use|invoke|apply|load) (this|the) skill|\bon every (request|message|task|prompt)\b|for (all|every) (task|request|message)s?\b|regardless of (the )?(task|topic|request)/i;
 
+const TEST_PATH =
+  /(^|[\\/])(tests?|__tests__|spec)[\\/]|(^|[\\/])test_[^\\/]+$|[._-](test|spec)\.[a-z]+$/i;
+const DETECTOR_CONTEXT =
+  /detect|dangerous|forbidden|deny|blocklist|block list|warn|pattern|regex|rule|guard|sanitiz|validat/i;
+const REGEX_LITERAL_LINE = /\/(?:[^/\\\n]|\\.)+\/[a-z]*\s*,?/;
+const classify = (rel, body, i) => {
+  if (TEST_PATH.test(rel)) return 'test-fixture';
+  const ls = body.lastIndexOf('\n', i) + 1;
+  const le = body.indexOf('\n', i);
+  const line = body.slice(ls, le === -1 ? undefined : le);
+  if (REGEX_LITERAL_LINE.test(line)) return 'detector';
+  if (DETECTOR_CONTEXT.test(body.slice(Math.max(0, i - 300), i + 300))) return 'detector';
+  return null;
+};
+
 function* walk(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.name === '.git' || e.name === 'node_modules') continue;
@@ -38,6 +59,7 @@ function* walk(dir) {
 
 const repoDir = process.argv[2];
 const findings = [];
+const acceptedCtx = [];
 let mdCount = 0, scriptCount = 0, skillMdCount = 0;
 
 for (const f of walk(repoDir)) {
@@ -59,7 +81,11 @@ for (const f of walk(repoDir)) {
     let body = '';
     try { body = fs.readFileSync(f, 'utf8'); } catch { continue; }
     for (const [re, label] of SCRIPT_FORBIDDEN) {
-      if (re.test(body)) findings.push(`${rel}: ${label}`);
+      const m = body.match(re);
+      if (!m) continue;
+      const ctx = classify(rel, body, m.index);
+      if (ctx) acceptedCtx.push(`${rel}: ${label} [accepted: ${ctx}]`);
+      else findings.push(`${rel}: ${label}`);
     }
   }
 }
@@ -68,3 +94,4 @@ console.log(`## ${path.basename(repoDir)}: ${skillMdCount} SKILL.md, ${mdCount} 
 if (findings.length === 0) console.log('   CLEAN under skill-safety patterns');
 for (const f of findings.slice(0, 8)) console.log(`   FLAG: ${f}`);
 if (findings.length > 8) console.log(`   ...and ${findings.length - 8} more`);
+for (const a of acceptedCtx) console.log(`   NOTE: ${a}`);

@@ -19,7 +19,7 @@ import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const METHODOLOGY_VERSION = '1.1';
+const METHODOLOGY_VERSION = '1.2';
 
 const read = (p) => fs.readFileSync(p, 'utf8');
 const exists = (p) => fs.existsSync(p);
@@ -114,7 +114,7 @@ const HOOK_FORBIDDEN = [
   [/\bfetch\s*\(|\bXMLHttpRequest\b|\bhttps?\.request\b|\bnet\.connect\b|\bWebSocket\b/, 'network call'],
   [/\bwriteFileSync?\s*\(|\bappendFileSync?\s*\(|\bcreateWriteStream\b|\bunlinkSync?\s*\(|\brmSync\s*\(/, 'filesystem write'],
   // ".env" must not match reading the process environment (process.env,
-  // import.meta.env) — only .env *files* and other credential stores.
+  // import.meta.env), only .env *files* and other credential stores.
   [/(?<!process)(?<!import\.meta)\.env\b|\bid_rsa\b|\.aws\b|credentials/i, 'credential/env access'],
   [/\beval\s*\(|\bFunction\s*\(/, 'dynamic code evaluation'],
 ];
@@ -240,26 +240,25 @@ function checkSkillStructure(pluginDir) {
   const skillsDir = path.join(pluginDir, 'skills');
   if (!exists(skillsDir)) return { status: 'n/a', detail: 'no skills' };
   const problems = [];
-  let count = 0;
-  for (const e of fs.readdirSync(skillsDir, { withFileTypes: true })) {
-    if (!e.isDirectory()) continue;
-    count++;
-    const sk = path.join(skillsDir, e.name, 'SKILL.md');
-    if (!exists(sk)) {
-      problems.push(`${e.name}: missing SKILL.md`);
+  const entries = listSkillDirs(skillsDir);
+  for (const s of entries) {
+    const label = s.container ? `${s.container}/${s.name}` : s.name;
+    if (s.missing) {
+      problems.push(`${label}: missing SKILL.md`);
       continue;
     }
+    const sk = path.join(s.dir, 'SKILL.md');
     const fm = frontmatter(read(sk));
-    if (!fm?.name || !fm?.description) problems.push(`${e.name}: SKILL.md missing name/description frontmatter`);
+    if (!fm?.name || !fm?.description) problems.push(`${label}: SKILL.md missing name/description frontmatter`);
     // Reference files mentioned in the skill must exist.
     const refs = read(sk).match(/references\/[A-Za-z0-9._-]+\.md/g) ?? [];
     for (const r of new Set(refs)) {
-      if (!exists(path.join(skillsDir, e.name, r))) problems.push(`${e.name}: referenced ${r} missing`);
+      if (!exists(path.join(s.dir, r))) problems.push(`${label}: referenced ${r} missing`);
     }
   }
   return problems.length
     ? { status: 'fail', detail: problems.join('; ') }
-    : { status: 'pass', detail: `all ${count} skill(s) have valid SKILL.md and every referenced reference file exists` };
+    : { status: 'pass', detail: `all ${entries.length} skill(s) have valid SKILL.md and every referenced reference file exists` };
 }
 
 // ---------------------------------------------------------------------------
@@ -309,6 +308,56 @@ const SKILL_SCRIPT_FORBIDDEN = [
   [/chmod\s+777/, 'world-writable permissions'],
 ];
 
+// v1.2: a forbidden-pattern match inside a security DETECTOR definition or a
+// test fixture is safety code, not an attack (the canonical case:
+// planning-with-files' dangerous-command warning regexes and their regression
+// tests). Such matches are recorded as accepted context in the result detail
+// instead of failing the check.
+const TEST_PATH =
+  /(^|[\\/])(tests?|__tests__|spec)[\\/]|(^|[\\/])test_[^\\/]+$|[._-](test|spec)\.[a-z]+$/i;
+const DETECTOR_CONTEXT =
+  /detect|dangerous|forbidden|deny|blocklist|block list|warn|pattern|regex|rule|guard|sanitiz|validat/i;
+
+// A regex literal on the match's own line marks detector code (the match is
+// the pattern being defined, or its inline comment) regardless of wording.
+const REGEX_LITERAL_LINE = /\/(?:[^/\\\n]|\\.)+\/[a-z]*\s*,?/;
+
+function classifyScriptMatch(rel, body, matchIndex) {
+  if (TEST_PATH.test(rel)) return 'test-fixture';
+  const lineStart = body.lastIndexOf('\n', matchIndex) + 1;
+  const lineEnd = body.indexOf('\n', matchIndex);
+  const line = body.slice(lineStart, lineEnd === -1 ? undefined : lineEnd);
+  if (REGEX_LITERAL_LINE.test(line)) return 'detector';
+  const win = body.slice(Math.max(0, matchIndex - 300), matchIndex + 300);
+  if (DETECTOR_CONTEXT.test(win)) return 'detector';
+  return null;
+}
+
+// v1.2: skills live either at skills/<name>/SKILL.md or in a container layout
+// skills/<container>/<variant>/SKILL.md (e.g. i18n variant packs). Returns the
+// actual skill directories in both layouts; a dir with neither its own
+// SKILL.md nor variant SKILL.mds is reported as missing.
+function listSkillDirs(skillsDir) {
+  const out = [];
+  for (const e of fs.readdirSync(skillsDir, { withFileTypes: true })) {
+    if (!e.isDirectory()) continue;
+    const dir = path.join(skillsDir, e.name);
+    if (exists(path.join(dir, 'SKILL.md'))) {
+      out.push({ name: e.name, dir });
+      continue;
+    }
+    const variants = fs
+      .readdirSync(dir, { withFileTypes: true })
+      .filter((v) => v.isDirectory() && exists(path.join(dir, v.name, 'SKILL.md')));
+    if (variants.length) {
+      for (const v of variants) out.push({ name: v.name, dir: path.join(dir, v.name), container: e.name });
+    } else {
+      out.push({ name: e.name, dir, missing: true });
+    }
+  }
+  return out;
+}
+
 function checkSkillSafety(pluginDir) {
   const skillsDir = path.join(pluginDir, 'skills');
   if (!exists(skillsDir)) return { status: 'n/a', detail: 'no skills' };
@@ -319,58 +368,64 @@ function checkSkillSafety(pluginDir) {
       .filter((f) => f.endsWith('.md'))
       .map((f) => f.replace(/\.md$/, '').split('/').pop())
   );
-  let count = 0;
-  for (const e of fs.readdirSync(skillsDir, { withFileTypes: true })) {
-    if (!e.isDirectory()) continue;
-    count++;
-    const skillDir = path.join(skillsDir, e.name);
-    const sk = path.join(skillDir, 'SKILL.md');
-    if (!exists(sk)) continue; // skill-structure already fails this
+  const accepted = []; // v1.2: matches classified as detector/test context
+  const entries = listSkillDirs(skillsDir).filter((s) => !s.missing);
+  for (const s of entries) {
+    const label = s.container ? `${s.container}/${s.name}` : s.name;
+    const sk = path.join(s.dir, 'SKILL.md');
     const src = read(sk);
     const fm = frontmatter(src) ?? {};
 
     // -- Name discipline: matches directory, safe charset, shadows nothing.
-    if (fm.name && fm.name !== e.name)
-      problems.push(`${e.name}: frontmatter name "${fm.name}" != directory name`);
+    if (fm.name && fm.name !== s.name)
+      problems.push(`${label}: frontmatter name "${fm.name}" != directory name`);
     if (fm.name && !/^[a-z0-9-]+$/.test(fm.name))
-      problems.push(`${e.name}: name must be lowercase alphanumeric with hyphens`);
-    const skillName = fm.name || e.name;
+      problems.push(`${label}: name must be lowercase alphanumeric with hyphens`);
+    const skillName = fm.name || s.name;
     if (BUILTIN_COMMANDS.has(skillName))
-      problems.push(`${e.name}: shadows built-in Claude Code command "/${skillName}"`);
+      problems.push(`${label}: shadows built-in Claude Code command "/${skillName}"`);
     if (ownCommands.has(skillName))
-      problems.push(`${e.name}: shadows this plugin's own command "/${skillName}"`);
+      problems.push(`${label}: shadows this plugin's own command "/${skillName}"`);
 
     // -- Trigger honesty: a description that claims everything triggers on
     //    everything, hijacking context on unrelated requests.
     const desc = fm.description ?? '';
-    if (desc && desc.length < 20) problems.push(`${e.name}: description too thin to scope the trigger`);
+    if (desc && desc.length < 20) problems.push(`${label}: description too thin to scope the trigger`);
     if (/always (use|invoke|apply|load) (this|the) skill|\bon every (request|message|task|prompt)\b|for (all|every) (task|request|message)s?\b|regardless of (the )?(task|topic|request)/i.test(desc))
-      problems.push(`${e.name}: greedy trigger — description claims all requests`);
+      problems.push(`${label}: greedy trigger: description claims all requests`);
 
     // -- Injection patterns in every markdown file the skill ships.
-    for (const f of walk(skillDir).filter((f) => f.endsWith('.md'))) {
-      const body = read(path.join(skillDir, f));
-      for (const [re, label] of INJECTION_PATTERNS) {
+    for (const f of walk(s.dir).filter((f) => f.endsWith('.md'))) {
+      const body = read(path.join(s.dir, f));
+      for (const [re, label2] of INJECTION_PATTERNS) {
         const m = body.match(re);
         if (m && !TEACHING_CONTEXT.test(body.slice(Math.max(0, m.index - 120), m.index + m[0].length + 120))) {
-          problems.push(`${e.name}/${f}: ${label} ("${m[0].slice(0, 60)}")`);
+          problems.push(`${label}/${f}: ${label2} ("${m[0].slice(0, 60)}")`);
         }
       }
     }
 
-    // -- Script safety for everything executable the skill ships.
-    for (const f of walk(skillDir).filter((f) => /\.(sh|bash|zsh|mjs|js|cjs|ts|py|rb|ps1)$/.test(f))) {
-      const body = read(path.join(skillDir, f));
-      for (const [re, label] of SKILL_SCRIPT_FORBIDDEN) {
-        if (re.test(body)) problems.push(`${e.name}/${f}: ${label}`);
+    // -- Script safety for everything executable the skill ships. Matches in
+    //    detector definitions or test fixtures are recorded, not failed.
+    for (const f of walk(s.dir).filter((f) => /\.(sh|bash|zsh|mjs|js|cjs|ts|py|rb|ps1)$/.test(f))) {
+      const body = read(path.join(s.dir, f));
+      for (const [re, label2] of SKILL_SCRIPT_FORBIDDEN) {
+        const m = body.match(re);
+        if (!m) continue;
+        const ctx = classifyScriptMatch(f, body, m.index);
+        if (ctx) accepted.push(`${label}/${f}: ${label2} [accepted: ${ctx}]`);
+        else problems.push(`${label}/${f}: ${label2}`);
       }
     }
   }
+  const acceptedNote = accepted.length
+    ? `; ${accepted.length} pattern match(es) accepted in detector/test context: ${accepted.join(' | ')}`
+    : '';
   return problems.length
-    ? { status: 'fail', detail: problems.join('; ') }
+    ? { status: 'fail', detail: problems.join('; ') + acceptedNote }
     : {
         status: 'pass',
-        detail: `all ${count} skill(s): no command shadowing, scoped triggers, no injection patterns, no unsafe scripts`,
+        detail: `all ${entries.length} skill(s): no command shadowing, scoped triggers, no injection patterns, no unsafe scripts${acceptedNote}`,
       };
 }
 
@@ -616,7 +671,7 @@ for (const entry of marketplace.plugins) {
 
 // Registry consistency (ported from the retired validate-plugins.sh): every
 // vendored plugins/<dir> must be listed in marketplace.json. The reverse
-// direction — listed but missing on disk — already fails manifest-integrity.
+// direction (listed but missing on disk) already fails manifest-integrity.
 const listedDirs = new Set(
   marketplace.plugins
     .filter((e) => typeof e.source === 'string')
