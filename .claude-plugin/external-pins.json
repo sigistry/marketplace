@@ -5,6 +5,11 @@
       "repo": "PapiScholz/search-visibility-kit",
       "commit": "050933b08a42806dd2d2206a8286252e8e057132",
       "path": "."
+    },
+    "planning-with-files": {
+      "repo": "OthmanAdi/planning-with-files",
+      "commit": "9e94390e5912b1ff296556505cd999ff84838160",
+      "path": "."
     }
   }
 }
