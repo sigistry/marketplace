@@ -1,6 +1,8 @@
 # Contributing to Sigistry
 
-Thank you for your interest in contributing to Sigistry! We're excited to see what plugins you'll create for the Claude Code community.
+Thank you for your interest in contributing to Sigistry! We're excited to see what plugins and skills you'll create. Plugins install natively in Claude Code; the skills they ship are also listed individually at [sigistry.com/skills](https://sigistry.com/skills), served through our MCP server, and portable to any agent that reads the SKILL.md standard.
+
+Listing is consent-first and free. You can request delisting of your own work at any time.
 
 ## How to Submit a Plugin
 
@@ -10,7 +12,7 @@ The registry has three tiers:
 
 - **Listed**: your plugin stays in your own repository and `marketplace.json` points at it (the Git-URL flow below), with no commit pin. It gets structural validation and human review, and users install it directly from your repo. Listed plugins do not carry the verification badge, because nothing pins what the code is: you could change it at any time after review.
 - **Verified at commit** (externally hosted): your plugin stays in your repository, and you also add a commit pin (repo + SHA + path) to `.claude-plugin/external-pins.json`. The verifier clones exactly that commit and runs the full methodology against it. Your badge reads `verified @<short-sha>`, a claim that stays true forever, and a daily drift watchdog flips it to `outdated` the moment your repo HEAD moves past the pin. Re-verify a new version by bumping the pin in a PR.
-- **Verified** (strongest): your plugin is vendored into this repository under `plugins/<your-plugin-name>/` via PR. It must pass the seven-check [verification methodology](https://sigistry.com/verification) (manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, no secrets, documentation) plus a human review of hook and agent code. CI re-verifies on every change, so the badge always describes exactly what users install:
+- **Verified** (strongest): your plugin is vendored into this repository under `plugins/<your-plugin-name>/` via PR. It must pass the eight-check [verification methodology](https://sigistry.com/verification) (manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, skill safety, no secrets, documentation) plus a human review of hook and agent code. CI re-verifies on every change, so the badge always describes exactly what users install:
 
 [![Verified by Sigistry](https://sigistry.com/badge/verified.svg)](https://sigistry.com/verification)
 
@@ -20,9 +22,12 @@ To go for **Verified**, follow the same steps below, but include your full plugi
 # Self-check your plugin (the exact checks CI will run):
 node scripts/verify-plugins.mjs path/to/your-plugin
 
-# Then regenerate the registry verification state and commit it with your PR:
-node scripts/verify-plugins.mjs
+# Then regenerate the registry state and commit both files with your PR:
+node scripts/verify-plugins.mjs           # -> .claude-plugin/verified.json
+node scripts/generate-skills-index.mjs    # -> .claude-plugin/skills.json
 ```
+
+Prefer the browser? The [free checker](https://sigistry.com/claude-plugin-checker) runs the same eight checks against any public repository without uploading anything.
 
 CI (`.github/workflows/verify.yml`) fails any PR where a plugin fails a check or where `.claude-plugin/verified.json` is stale, so the badge can never drift from the code.
 
@@ -37,10 +42,24 @@ your-plugin-name/
 ├── commands/                # Optional: Custom slash commands
 │   └── your-command.md
 ├── agents/                  # Optional: Custom agents
+├── skills/                  # Optional: Skills (auto-loaded when they apply)
+│   └── your-skill/
+│       ├── SKILL.md         # name + description frontmatter, then the skill
+│       └── references/      # Optional supporting files
 ├── hooks/                   # Optional: Event handlers
 ├── README.md                # Required: Usage documentation
 └── LICENSE                  # Required: Open source license
 ```
+
+#### If your plugin ships skills
+
+Skills are held to the [skill-safety check](https://sigistry.com/skill-verification), because a SKILL.md is injected into the agent's context when it triggers:
+
+- **Name**: lowercase alphanumeric with hyphens, exactly matching the directory name; must not shadow a built-in Claude Code command or one of your own commands
+- **Description**: an honestly-scoped trigger describing when the skill applies (no "use on every request")
+- **Content**: no instruction-override, concealment, or exfiltration language; documentation that teaches attack patterns defensively is fine
+- **Scripts**: nothing that pipes remote content to a shell, decodes hidden payloads, touches credential files, or sends secrets off-machine; matches inside security-detector definitions and test fixtures are recorded as accepted context, not failed
+- Container layouts (`skills/<container>/<variant>/SKILL.md`, e.g. i18n packs) are supported
 
 #### Required: plugin.json
 
@@ -76,7 +95,7 @@ Before submitting, test your plugin thoroughly:
 
 ```bash
 # Install Claude Code (if not already installed)
-npm install -g @anthropic/claude-code
+npm install -g @anthropic-ai/claude-code
 
 # Test your plugin locally
 cd your-plugin-directory
@@ -204,7 +223,7 @@ After submission:
    - Plugin repository accessibility
    - Plugin structure and metadata
    - marketplace.json syntax
-   - For vendored (Verified-tier) submissions: the full seven-check verification methodology, including a stale-`verified.json` gate
+   - For vendored (Verified-tier) submissions: the full eight-check verification methodology, including a stale-`verified.json` gate
 2. **Manual Review** - We'll review your plugin for:
    - Code quality and security
    - Functionality and usefulness
@@ -218,9 +237,20 @@ After submission:
    - Your plugin will be available for installation via Claude Code
    - Users will install directly from your repository
 
+## Listing Policy
+
+Passing the checks is necessary but not sufficient. We decline listings that:
+
+- Require payment or a paid account to deliver their core function
+- Gate basic functionality behind credentials to third-party services without clear, upfront disclosure
+- Violate the terms of service of the tools they integrate with
+- Conflict with the registry's values, even when the verifier passes cleanly; a clean static analysis does not obligate a listing
+
+Declines are explained, and authors are welcome to address the reason and resubmit.
+
 ## Plugin Guidelines
 
-### ✅ Do
+### Do
 
 - Write clear, helpful documentation
 - Test thoroughly before submitting
@@ -230,7 +260,7 @@ After submission:
 - Keep dependencies minimal
 - Use semantic versioning
 
-### ❌ Don't
+### Don't
 
 - Submit malicious code
 - Include credentials or API keys
@@ -292,8 +322,9 @@ Users will automatically get updates when they pull from your plugin repository.
 
 ## Getting Help
 
-- **Questions?** Open a [GitHub Discussion](https://github.com/sigistry/marketplace/discussions)
+- **Questions?** Open a [GitHub Discussion](https://github.com/sigistry/marketplace/discussions) or email [hello@sigistry.com](mailto:hello@sigistry.com)
 - **Issues?** Report bugs in [Issues](https://github.com/sigistry/marketplace/issues)
+- **Security concerns?** See [SECURITY.md](SECURITY.md); do not open a public issue for vulnerabilities
 - **Examples?** Check the marketplace.json to see existing plugins and their repository URLs
 
 ## Code of Conduct
@@ -302,4 +333,4 @@ Be respectful, constructive, and collaborative. We're building a community toget
 
 ---
 
-Thank you for contributing to Sigistry! 🚀
+Thank you for contributing to Sigistry!

@@ -1,47 +1,79 @@
-# Sigistry Marketplace
+<p align="center">
+  <a href="https://sigistry.com"><img src="https://sigistry.com/logos/sigi.svg" alt="Sigi, the Sigistry mascot" width="130"></a>
+</p>
 
-Official plugin marketplace for Claude Code. Browse plugins at [sigistry.com](https://sigistry.com).
+<h1 align="center">Sigistry</h1>
 
-## Quick Start
+<p align="center">
+  <strong>The verified registry for AI coding agents.</strong><br>
+  Security-checked plugins and portable skills: open methodology, machine-readable results, consent-first curation.
+</p>
 
-Add marketplace:
+<p align="center">
+  <a href="https://sigistry.com/verification"><img src="https://sigistry.com/badge/verified.svg" alt="Verified by Sigistry" height="20"></a>
+</p>
+
+<p align="center">
+  <a href="https://sigistry.com">Website</a> ·
+  <a href="https://sigistry.com/skills">Skills Catalog</a> ·
+  <a href="https://sigistry.com/verification">Methodology</a> ·
+  <a href="https://sigistry.com/skill-verification">Skill Verification</a> ·
+  <a href="https://sigistry.com/claude-plugin-checker">Free Checker</a>
+</p>
+
+---
+
+Every listing here passes an **eight-check security methodology** before it ships to anyone: manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, skill safety, no secrets, and documentation. The checks are [open source](scripts/verify-plugins.mjs), the results are [machine-readable](.claude-plugin/verified.json), and CI re-runs everything on every change; a badge can never silently drift from the code it vouches for.
+
+**Skills are first-class.** A `SKILL.md` is text injected straight into an agent's context, which makes it a prompt-injection surface most directories never screen. Sigistry's [skill-safety check](https://sigistry.com/skill-verification) screens for command shadowing, greedy triggers, injection and concealment language, and unsafe scripts. Verified skills are portable: usable in Claude Code, Claude Desktop, and any of the 60+ agents that read the SKILL.md standard. Browse them at [sigistry.com/skills](https://sigistry.com/skills) or copy one straight from its page.
+
+## Quick start
+
+**In Claude Code**: add the marketplace, install a plugin (its skills load automatically):
+
 ```
 /plugin marketplace add sigistry/marketplace
-```
-
-Install a plugin:
-```
 /plugin install code-auditor@sigistry
 ```
 
-## Available Plugins
+**In any MCP client**: connect the read-only catalog server and search plugins and skills in conversation (`search_plugins`, `search_skills`, `get_skill` returns full portable skill source):
 
-| Plugin | Description |
-|--------|-------------|
-| [code-auditor](https://sigistry.com/plugin/code-auditor) | Security, architecture, and performance analysis |
-| [doc-generator](https://sigistry.com/plugin/doc-generator) | Automated documentation generation |
-| [test-generator](https://sigistry.com/plugin/test-generator) | Test generation and coverage analysis |
-| [legacy-analyzer](https://sigistry.com/plugin/legacy-analyzer) | Business logic extraction from legacy code |
-| [data-converter](https://sigistry.com/plugin/data-converter) | Data transformation and format conversion |
-| [code-tutor](https://sigistry.com/plugin/code-tutor) | Interactive coding education and mentoring |
-| [seo-optimizer](https://sigistry.com/plugin/seo-optimizer) | SEO audit, optimization, and review |
-| [plugin-benchmarker](https://sigistry.com/plugin/plugin-benchmarker) | Benchmark and audit Claude Code plugins and skills |
-| [release-conductor](https://sigistry.com/plugin/release-conductor) | Commits, semver, changelogs, conflicts, and git-history archaeology |
-| [ci-incident-medic](https://sigistry.com/plugin/ci-incident-medic) | CI failure triage, Dockerfile hardening, K8s pre-flight, and postmortems |
-| [sql-safety-net](https://sigistry.com/plugin/sql-safety-net) | Safe migrations, N+1 hunting, and EXPLAIN-plan interpretation |
-| [a11y-i18n-remediator](https://sigistry.com/plugin/a11y-i18n-remediator) | Fixes (not just flags) WCAG, ARIA, focus, ICU i18n, and RTL issues |
-| [api-contract-keeper](https://sigistry.com/plugin/api-contract-keeper) | OpenAPI/GraphQL drift, endpoint hardening, breaking-change and queue checks |
-| [llm-app-hardener](https://sigistry.com/plugin/llm-app-hardener) | Eval scaffolding, prompt-injection red-teaming, structured output, token cost |
-| [codebase-navigator](https://sigistry.com/plugin/codebase-navigator) | Local setup fixes, build-system decode, change localization, flow tracing |
+```
+claude mcp add --transport http sigistry https://sigistry.com/mcp
+```
 
-## Contributing
+**In any agent at all**: open a skill at [sigistry.com/skills](https://sigistry.com/skills), copy its source, done.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to submit your plugin.
+## The registry
 
-## Links
+Browse the live catalog: always current, always showing verification status:
 
-- Website: [sigistry.com](https://sigistry.com)
-- Docs: [Claude Code Plugin Docs](https://docs.anthropic.com/en/docs/claude-code/plugins)
+- **[Plugins](https://sigistry.com/plugins)**: every listing with its per-check audit results
+- **[Skills](https://sigistry.com/skills)**: every verified skill, with portable source on each page
+
+The machine-readable truth lives right here in [`marketplace.json`](.claude-plugin/marketplace.json), [`verified.json`](.claude-plugin/verified.json), and [`skills.json`](.claude-plugin/skills.json): agents and CI can consume those directly.
+
+## What's in this repository
+
+| Path | Purpose |
+|------|---------|
+| [`plugins/`](plugins/) | Vendored plugin source: what verification actually audits |
+| [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | The catalog manifest |
+| [`.claude-plugin/verified.json`](.claude-plugin/verified.json) | Machine-readable per-check verification results |
+| [`.claude-plugin/skills.json`](.claude-plugin/skills.json) | The skills index (registry + external-by-reference) |
+| [`.claude-plugin/external-pins.json`](.claude-plugin/external-pins.json) | Commit pins for externally hosted verified listings |
+| [`scripts/verify-plugins.mjs`](scripts/verify-plugins.mjs) | The methodology itself: read it, run it, challenge it |
+| [`scripts/prescreen-skills.mjs`](scripts/prescreen-skills.mjs) | Standalone pre-screen for external skill repos |
+
+## Get verified
+
+Run the checks yourself before submitting: [in your browser](https://sigistry.com/claude-plugin-checker) against any public repo, or locally:
+
+```
+node scripts/verify-plugins.mjs path/to/your-plugin
+```
+
+Then see [CONTRIBUTING.md](CONTRIBUTING.md). Vendor into the registry for the strongest tier, or stay in your own repo and get verified at a pinned commit: external listings are indexed **by reference**: no source is copied, your license and provenance stay yours, and delisting removes everything. Listing is consent-first and free; Sigistry is non-commercial and open source.
 
 ---
 
