@@ -590,6 +590,32 @@
       ]
     },
     {
+      "name": "lila-perimenopause",
+      "description": "Evidence-aware perimenopause and menopause guidance covering symptoms, stages, testing, treatment options, lifestyle approaches, supplements, and appointment preparation, with clear medical-safety boundaries.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Tidalflow Health",
+        "url": "https://getlila.com"
+      },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Tidalflow-Health/lila-perimenopause.git"
+      },
+      "category": "education",
+      "homepage": "https://github.com/Tidalflow-Health/lila-perimenopause",
+      "repository": "https://github.com/Tidalflow-Health/lila-perimenopause",
+      "license": "MIT",
+      "keywords": [
+        "perimenopause",
+        "menopause",
+        "women's health",
+        "health education",
+        "medical safety",
+        "agent skills"
+      ],
+      "strict": false
+    },
+    {
       "name": "search-visibility-kit",
       "description": "Connect Claude to Google Search Console, GA4 and IndexNow with live data: guided credential setup, evidence-based SEO audits, sitemap health checks, and delta URL submissions. One service account, unlimited sites.",
       "version": "0.3.1",
