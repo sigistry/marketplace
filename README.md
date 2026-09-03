@@ -61,7 +61,6 @@ The machine-readable truth lives right here in [`marketplace.json`](.claude-plug
 | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) | The catalog manifest |
 | [`.claude-plugin/verified.json`](.claude-plugin/verified.json) | Machine-readable per-check verification results |
 | [`.claude-plugin/skills.json`](.claude-plugin/skills.json) | The skills index (registry + external-by-reference) |
-| [`.claude-plugin/external-pins.json`](.claude-plugin/external-pins.json) | Commit pins for externally hosted verified listings |
 | [`scripts/verify-plugins.mjs`](scripts/verify-plugins.mjs) | The methodology itself: read it, run it, challenge it |
 | [`scripts/prescreen-skills.mjs`](scripts/prescreen-skills.mjs) | Standalone pre-screen for external skill repos |
 

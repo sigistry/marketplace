@@ -68,4 +68,5 @@ description, stale verification badge), a public issue is fine: use the
 ## Supported Versions
 
 The registry is a rolling catalog: only the current state of `main` (and the
-pinned commits recorded in `.claude-plugin/external-pins.json`) is supported.
+commit each externally-hosted entry pins via its `git-subdir` source `sha` in
+`.claude-plugin/marketplace.json`) is supported.

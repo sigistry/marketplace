@@ -497,13 +497,27 @@ function runChecks(pluginDir, entry) {
 
 // ---------------------------------------------------------------------------
 // Externally-hosted plugins, verified at a pinned commit.
-// The pin (repo + commit + path) lives in .claude-plugin/external-pins.json;
-// we clone exactly that commit and run the same checks. The resulting badge
-// vouches for THAT commit; the drift watchdog flags when the repo moves past it.
+// The pin (repo + commit + path) is derived from the marketplace entry's own
+// git-subdir source (its `sha` is the commit Claude Code installs); we clone
+// exactly that commit and run the same checks. The resulting badge vouches for
+// THAT commit; the drift watchdog flags when the repo moves past it.
 // ---------------------------------------------------------------------------
 
 const git = (cmd, opts = {}) =>
   execSync(`git ${cmd}`, { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', timeout: 120000, ...opts }).trim();
+
+// Single source of truth for external pins: a `git-subdir` source whose `sha`
+// pins the exact commit. The commit Claude Code installs is the commit we clone
+// and verify, so there is no separate pin file to drift out of sync. Returns the
+// { repo, commit, path } shape the verifier already speaks, or null when the
+// entry carries no inline sha (then it is listed, not verified).
+function pinFromSource(entry) {
+  const s = entry.source;
+  if (!s || typeof s === 'string' || !s.sha) return null;
+  const m = /(?:github\.com[/:])([^/\s]+\/[^/\s]+?)(?:\.git)?$/.exec(s.url ?? '');
+  if (!m) return null;
+  return { repo: m[1], commit: s.sha, path: s.path ?? '.' };
+}
 
 function validatePin(name, pin) {
   if (!/^[\w.-]+\/[\w.-]+$/.test(pin.repo ?? '')) return `${name}: pin.repo must be "owner/repo"`;
@@ -576,9 +590,6 @@ const result = {
   plugins: {},
 };
 
-const pinsPath = path.join(ROOT, '.claude-plugin', 'external-pins.json');
-const pins = exists(pinsPath) ? JSON.parse(read(pinsPath)).plugins ?? {} : {};
-
 // Carry forward firstSeen (the date a plugin first entered the registry) from
 // the committed verified.json; new plugins get today. Backfilled once from git
 // history when the field was introduced.
@@ -590,12 +601,12 @@ let failures = 0;
 for (const entry of marketplace.plugins) {
   const date = result.generated.slice(0, 10);
 
-  // Externally-hosted listings (object source: git URL / github repo).
-  // With a commit pin: clone that exact commit and verify it, "verified at
-  // commit". Without a pin: "listed", never verified, we cannot vouch for
-  // code we neither host nor pin.
+  // Externally-hosted listings (object source: git-subdir / url / github).
+  // A `git-subdir` source with a `sha` pins the exact commit Claude Code
+  // installs; we clone that same commit and verify it, "verified at commit".
+  // No sha means nothing immutable to point at: "listed", never verified.
   if (typeof entry.source !== 'string') {
-    const pin = pins[entry.name];
+    const pin = pinFromSource(entry);
     if (!pin) {
       result.plugins[entry.name] = {
         status: 'listed',
@@ -614,17 +625,6 @@ for (const entry of marketplace.plugins) {
       result.plugins[entry.name] = { status: 'failed', hosting: 'external', version: entry.version, date, firstSeen: firstSeenOf(entry.name), checks: [], note: pinErr };
       failures++;
       console.log(`FAILED    ${entry.name}\n          - invalid pin: ${pinErr}`);
-      continue;
-    }
-    // Install/verify lock: when the marketplace entry carries an inline commit
-    // (git-subdir sha), Claude Code installs THAT commit. It must equal the pin
-    // we verify, or installers would get code we never checked. Fail loudly so
-    // the two can never silently drift apart.
-    const inlineSha = typeof entry.source === 'object' ? entry.source.sha : undefined;
-    if (inlineSha && inlineSha.toLowerCase() !== pin.commit.toLowerCase()) {
-      result.plugins[entry.name] = { status: 'failed', hosting: 'external', version: entry.version, date, firstSeen: firstSeenOf(entry.name), checks: [], note: `marketplace source.sha (${inlineSha.slice(0, 7)}) != verified pin.commit (${pin.commit.slice(0, 7)})` };
-      failures++;
-      console.log(`FAILED    ${entry.name}\n          - source.sha ${inlineSha.slice(0, 7)} != pin.commit ${pin.commit.slice(0, 7)}`);
       continue;
     }
     try {

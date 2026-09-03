@@ -95,11 +95,20 @@ function collectSkills(skillsDir, entry, v, base) {
 
 const marketplace = JSON.parse(read(path.join(ROOT, '.claude-plugin', 'marketplace.json')));
 const verified = JSON.parse(read(path.join(ROOT, '.claude-plugin', 'verified.json')));
-const pinsPath = path.join(ROOT, '.claude-plugin', 'external-pins.json');
-const pins = exists(pinsPath) ? JSON.parse(read(pinsPath)).plugins ?? {} : {};
 
 const git = (cmd, opts = {}) =>
   execSync(`git ${cmd}`, { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8', timeout: 120000, ...opts }).trim();
+
+// The external pin is the marketplace entry's own `git-subdir` source: its `sha`
+// is the exact commit Claude Code installs, and the commit we index skills from.
+// One source of truth, shared with verify-plugins.mjs (no separate pin file).
+function pinFromSource(entry) {
+  const s = entry.source;
+  if (!s || typeof s === 'string' || !s.sha) return null;
+  const m = /(?:github\.com[/:])([^/\s]+\/[^/\s]+?)(?:\.git)?$/.exec(s.url ?? '');
+  if (!m) return null;
+  return { repo: m[1], commit: s.sha, path: s.path ?? '.' };
+}
 
 const skills = [];
 for (const entry of marketplace.plugins) {
@@ -120,9 +129,9 @@ for (const entry of marketplace.plugins) {
   // Externally-hosted with a commit pin: clone exactly that commit and index
   // by reference. Without a pin there is nothing immutable to point at.
   // Pin fields are interpolated into git commands, so validate their shape
-  // even though external-pins.json only changes via reviewed PRs (same rules
-  // as verify-plugins.mjs validatePin).
-  const pin = pins[entry.name];
+  // even though the source (and its sha) only changes via reviewed PRs (same
+  // rules as verify-plugins.mjs validatePin).
+  const pin = pinFromSource(entry);
   if (!pin?.repo || !pin?.commit) continue;
   if (
     !/^[\w.-]+\/[\w.-]+$/.test(pin.repo) ||

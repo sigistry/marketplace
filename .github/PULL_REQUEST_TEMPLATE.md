@@ -12,7 +12,7 @@ the change and delete the plugin section.
 ## Type of change
 
 - [ ] Plugin submission (new plugin or version bump)
-- [ ] Registry metadata fix (marketplace.json, verified.json, pins)
+- [ ] Registry metadata fix (marketplace.json, verified.json)
 - [ ] Docs / contributing flow
 - [ ] Scripts / CI / verification tooling
 
@@ -21,7 +21,7 @@ the change and delete the plugin section.
 Tier requested (see [CONTRIBUTING.md](../CONTRIBUTING.md)):
 
 - [ ] **Listed** — external repo, marketplace.json entry only
-- [ ] **Verified at commit** — external repo + pin in `.claude-plugin/external-pins.json`
+- [ ] **Verified at commit** — external repo, marketplace.json entry with a `git-subdir` source pinning a commit `sha`
 - [ ] **Verified** — vendored under `plugins/<name>/`
 
 Checklist:

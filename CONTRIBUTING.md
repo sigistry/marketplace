@@ -11,7 +11,7 @@ Listing is consent-first and free. You can request delisting of your own work at
 The registry has three tiers:
 
 - **Listed**: your plugin stays in your own repository and `marketplace.json` points at it (the Git-URL flow below), with no commit pin. It gets structural validation and human review, and users install it directly from your repo. Listed plugins do not carry the verification badge, because nothing pins what the code is: you could change it at any time after review.
-- **Verified at commit** (externally hosted): your plugin stays in your repository, and you also add a commit pin (repo + SHA + path) to `.claude-plugin/external-pins.json`. The verifier clones exactly that commit and runs the full methodology against it. Your badge reads `verified @<short-sha>`, a claim that stays true forever, and a daily drift watchdog flips it to `outdated` the moment your repo HEAD moves past the pin. Re-verify a new version by bumping the pin in a PR.
+- **Verified at commit** (externally hosted): your plugin stays in your repository, and your `marketplace.json` entry uses a `git-subdir` source that pins an exact commit `sha` (the [source options](#source-field-options) below). That single `sha` is both what Claude Code installs and what we verify: the verifier clones exactly that commit and runs the full methodology against it. Your badge reads `verified @<short-sha>`, a claim that stays true forever, and a daily drift watchdog flips it to `outdated` the moment your repo HEAD moves past the pin. Re-verify a new version by bumping the `sha` in a PR.
 - **Verified** (strongest): your plugin is vendored into this repository under `plugins/<your-plugin-name>/` via PR. It must pass the eight-check [verification methodology](https://sigistry.com/verification) (manifest integrity, hook safety, agent tool scopes, command hygiene, skill structure, skill safety, no secrets, documentation) plus a human review of hook and agent code. CI re-verifies on every change, so the badge always describes exactly what users install:
 
 [![Verified by Sigistry](https://sigistry.com/badge/verified.svg)](https://sigistry.com/verification)
@@ -165,13 +165,24 @@ Add your plugin to the `plugins` array using the Git URL format:
 }
 ```
 
-**Important**: The `source` field tells Claude Code where to find your plugin. We use the Git URL format which supports any Git hosting service (GitHub, GitLab, Bitbucket, self-hosted, etc.).
+**Important**: The `source` field tells Claude Code where to find your plugin. The Git URL format shown above supports any Git hosting service (GitHub, GitLab, Bitbucket, self-hosted, etc.) and gives you a **Listed** entry. To be **Verified at commit**, use the pinned `git-subdir` source in the [options below](#source-field-options) instead: it locks installs to the exact commit we verify.
 
 #### Source Field Options
 
-While we recommend the Git URL format shown above, the source field supports multiple formats:
+The source field supports several formats. Which one you pick sets your tier:
 
-1. **Git URL (Recommended)** - Works with any Git hosting:
+1. **git-subdir with a pinned `sha` (Recommended for Verified at commit)** - pins the exact commit Claude Code installs, which is the same commit we clone and verify. `path` is your plugin's directory inside the repo (`"."` for the repo root), `ref` is the branch or tag the commit lives on (human-readable; `sha` is the actual pin):
+```json
+"source": {
+  "source": "git-subdir",
+  "url": "https://github.com/yourusername/your-plugin-name.git",
+  "path": ".",
+  "ref": "main",
+  "sha": "0000000000000000000000000000000000000000"
+}
+```
+
+2. **Git URL (Listed only)** - works with any Git hosting, but installs from your repo's current HEAD, so it cannot be verified (nothing pins what the code is):
 ```json
 "source": {
   "source": "url",
@@ -179,7 +190,7 @@ While we recommend the Git URL format shown above, the source field supports mul
 }
 ```
 
-2. **GitHub (Alternative)** - Shorthand for GitHub repositories:
+3. **GitHub (Listed only)** - shorthand for GitHub repositories, same unpinned caveat as the Git URL:
 ```json
 "source": {
   "source": "github",
@@ -187,12 +198,12 @@ While we recommend the Git URL format shown above, the source field supports mul
 }
 ```
 
-3. **Relative Path** - Only for plugins hosted in this repository:
+4. **Relative Path** - only for plugins vendored into this repository (the strongest **Verified** tier):
 ```json
 "source": "./plugins/your-plugin-name"
 ```
 
-For external submissions, always use option 1 (Git URL format).
+For a verifiable external submission, use option 1 and set `sha` to the commit you want reviewed.
 
 ```bash
 # Commit your changes

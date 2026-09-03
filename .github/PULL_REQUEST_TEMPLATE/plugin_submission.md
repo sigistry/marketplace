@@ -20,7 +20,7 @@ about: Submit a new plugin to Sigistry
 See [CONTRIBUTING.md](https://github.com/Sigistry/marketplace/blob/main/CONTRIBUTING.md) for what each tier means:
 
 - [ ] **Listed** — plugin stays in my repository; this PR adds a `marketplace.json` entry pointing at it
-- [ ] **Verified at commit** — plugin stays in my repository; this PR also pins a commit in `.claude-plugin/external-pins.json`
+- [ ] **Verified at commit** — plugin stays in my repository; my `marketplace.json` entry uses a `git-subdir` source pinning a commit `sha`
 - [ ] **Verified** — plugin is vendored under `plugins/<name>/` in this PR
 
 ## Plugin Details
