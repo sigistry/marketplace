@@ -86,6 +86,7 @@ function collectSkills(skillsDir, entry, v, base) {
       pluginCategory: entry.category ?? null,
       status: v?.status ?? 'unknown',
       verifiedDate: v?.date ?? null,
+      firstSeen: v?.firstSeen ?? null, // parent plugin's registry-entry date; drives "newest first" + New badge
       ...base(s),
     });
   }
