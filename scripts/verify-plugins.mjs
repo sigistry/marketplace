@@ -616,6 +616,17 @@ for (const entry of marketplace.plugins) {
       console.log(`FAILED    ${entry.name}\n          - invalid pin: ${pinErr}`);
       continue;
     }
+    // Install/verify lock: when the marketplace entry carries an inline commit
+    // (git-subdir sha), Claude Code installs THAT commit. It must equal the pin
+    // we verify, or installers would get code we never checked. Fail loudly so
+    // the two can never silently drift apart.
+    const inlineSha = typeof entry.source === 'object' ? entry.source.sha : undefined;
+    if (inlineSha && inlineSha.toLowerCase() !== pin.commit.toLowerCase()) {
+      result.plugins[entry.name] = { status: 'failed', hosting: 'external', version: entry.version, date, firstSeen: firstSeenOf(entry.name), checks: [], note: `marketplace source.sha (${inlineSha.slice(0, 7)}) != verified pin.commit (${pin.commit.slice(0, 7)})` };
+      failures++;
+      console.log(`FAILED    ${entry.name}\n          - source.sha ${inlineSha.slice(0, 7)} != pin.commit ${pin.commit.slice(0, 7)}`);
+      continue;
+    }
     try {
       const { ok, checks, headCommit, current } = verifyExternal(entry, pin);
       const status = !ok ? 'failed' : current === false ? 'stale' : 'verified';

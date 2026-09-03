@@ -598,8 +598,11 @@
         "url": "https://getlila.com"
       },
       "source": {
-        "source": "url",
-        "url": "https://github.com/Tidalflow-Health/lila-perimenopause.git"
+        "source": "git-subdir",
+        "url": "https://github.com/Tidalflow-Health/lila-perimenopause.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "21a963cc0bf2a8a82bb7c77ed5e77f6faafa279d"
       },
       "category": "education",
       "homepage": "https://github.com/Tidalflow-Health/lila-perimenopause",
@@ -624,8 +627,11 @@
         "url": "https://github.com/PapiScholz"
       },
       "source": {
-        "source": "url",
-        "url": "https://github.com/PapiScholz/search-visibility-kit.git"
+        "source": "git-subdir",
+        "url": "https://github.com/PapiScholz/search-visibility-kit.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "050933b08a42806dd2d2206a8286252e8e057132"
       },
       "category": "seo",
       "homepage": "https://github.com/PapiScholz/search-visibility-kit",
