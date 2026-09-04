@@ -1,7 +1,7 @@
 {
   "name": "seo-optimizer",
-  "version": "1.0.0",
-  "description": "Comprehensive SEO optimization plugin for auditing, optimizing, and reviewing website content for search engine performance",
+  "version": "1.1.0",
+  "description": "Comprehensive SEO plugin for auditing, optimizing, and reviewing website content, now including AI discoverability: llms.txt generation and validation, AI-crawler access, and answer-engine readiness for ChatGPT, Claude, and Perplexity",
   "author": {
     "name": "Sigistry",
     "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/seo-optimizer"

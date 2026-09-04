@@ -2,11 +2,13 @@
 
 [![Verified by Sigistry](https://sigistry.com/badge/seo-optimizer.svg)](https://sigistry.com/plugin/seo-optimizer)
 
-Comprehensive SEO optimization plugin for Claude Code. Audit, optimize, and review website content for improved search engine performance.
+Comprehensive SEO plugin for Claude Code. Audit, optimize, and review website content for search engines, and now make your site legible to AI answer engines too with built-in **llms.txt** generation and validation.
 
 ## Purpose
 
-The SEO Optimizer plugin helps developers and content creators implement SEO best practices directly from the command line. It provides tools for auditing existing SEO implementation, optimizing content for search, and applying precision micro-edits that improve discoverability without altering the original voice or style.
+The SEO Optimizer plugin helps developers and content creators implement SEO best practices directly from the command line. It audits existing SEO implementation, optimizes content for search, and applies precision micro-edits that improve discoverability without altering the original voice or style.
+
+**New in 1.1.0: AI discoverability.** Search is no longer only ten blue links. ChatGPT, Claude, Perplexity, and Google AI Overviews read sites too, and they look for signals classic SEO ignores. The plugin now generates and validates [llms.txt](https://llmstxt.org), checks AI-crawler access in robots.txt (GPTBot, ClaudeBot, PerplexityBot, Google-Extended), and flags content that AI crawlers cannot read. Run `/llms-audit` for the full pass.
 
 ## Installation
 
@@ -81,6 +83,26 @@ Apply minimal SEO micro-edits as part of a content review pipeline. Stricter tha
 - YMYL content protection (health/finance/legal)
 - No fabrication of facts or data
 
+#### `/llms-audit` - AI Discoverability & llms.txt
+
+Audit whether your site is legible to AI answer engines and agents, and generate a compliant `llms.txt` when one is missing.
+
+```bash
+# Audit a local project (finds the web root)
+/llms-audit ./
+
+# Audit a live site
+/llms-audit https://example.com
+```
+
+**What it does:**
+- Checks for a valid `/llms.txt` (and `/llms-full.txt`) per the [llmstxt.org](https://llmstxt.org) standard
+- Generates a curated `llms.txt` from your real pages when one is missing
+- Reports AI-crawler access in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot)
+- Flags content AI crawlers cannot read (JS-only rendering, missing answer-shaped schema)
+
+Crawler access is treated as an owner policy decision: the audit reports the tradeoff and never changes robots.txt on its own.
+
 ### Skill
 
 #### SEO Expert
@@ -91,13 +113,15 @@ Activate the SEO Expert skill for interactive consultation on SEO topics.
 - Technical SEO (crawlability, Core Web Vitals, structured data)
 - On-page SEO (meta tags, headings, content optimization)
 - Platform-specific SEO (Next.js, React, Vue, WordPress)
+- AI discoverability & GEO (llms.txt, AI-crawler policy, getting cited in AI answers)
 - Content strategy and search intent
 
 **Example interactions:**
 - "How do I implement structured data for my blog?"
 - "What's wrong with my meta tag setup?"
 - "Help me optimize this page for Core Web Vitals"
-- "Review my robots.txt configuration"
+- "Set up an llms.txt so ChatGPT and Perplexity can read my site"
+- "Which AI crawlers is my robots.txt blocking?"
 
 ## Typical Workflow
 
@@ -152,9 +176,10 @@ seo-optimizer/
 ├── .claude-plugin/
 │   └── plugin.json         # Plugin metadata
 ├── commands/
-│   ├── seo-audit.md        # SEO compliance audit
+│   ├── seo-audit.md        # SEO compliance audit (incl. AI discoverability)
 │   ├── seo-optimize.md     # Content optimization
-│   └── seo-reviewer.md     # Micro-edit review
+│   ├── seo-reviewer.md     # Micro-edit review
+│   └── llms-audit.md       # llms.txt audit + generator
 ├── skills/
 │   └── seo-expert.md       # Interactive SEO consultant
 └── README.md               # This file
@@ -184,6 +209,12 @@ Use this checklist alongside the plugin:
 - [ ] robots.txt
 - [ ] sitemap.xml
 - [ ] Structured data (JSON-LD)
+
+### AI Discoverability
+- [ ] llms.txt at the site root (valid, curated, current)
+- [ ] llms-full.txt for docs/content-heavy sites
+- [ ] AI crawlers allowed (or intentionally blocked) in robots.txt
+- [ ] Answer-shaped content is server-rendered with FAQ/HowTo schema
 
 ## Requirements
 

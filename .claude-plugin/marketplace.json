@@ -198,8 +198,8 @@
     },
     {
       "name": "seo-optimizer",
-      "description": "Comprehensive SEO optimization plugin for auditing, optimizing, and reviewing website content for improved search engine performance",
-      "version": "1.0.0",
+      "description": "Comprehensive SEO plugin for auditing, optimizing, and reviewing website content, now with AI discoverability: llms.txt generation and validation, AI-crawler access, and answer-engine readiness for ChatGPT, Claude, and Perplexity",
+      "version": "1.1.0",
       "author": {
         "name": "Sigistry"
       },
@@ -210,6 +210,9 @@
       "keywords": [
         "seo",
         "search-engine-optimization",
+        "llms-txt",
+        "generative-engine-optimization",
+        "ai-search",
         "meta-tags",
         "structured-data",
         "schema-org",
@@ -221,7 +224,8 @@
       "commands": [
         "./commands/seo-audit.md",
         "./commands/seo-optimize.md",
-        "./commands/seo-reviewer.md"
+        "./commands/seo-reviewer.md",
+        "./commands/llms-audit.md"
       ],
       "skills": [
         "./skills/seo-expert.md"

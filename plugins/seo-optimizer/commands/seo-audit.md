@@ -344,6 +344,60 @@ Check for Schema.org structured data:
 - [ ] Font sizes readable (16px minimum)
 - [ ] No Flash or deprecated technologies
 
+### Step 12: AI Discoverability Audit
+
+Search is no longer only ten blue links. AI answer engines (ChatGPT, Claude, Perplexity, Google AI Overviews) and autonomous agents now read sites too, and they look for signals classic SEO ignores. Check whether this site is legible to them.
+
+#### llms.txt
+
+**Location:** Site root (`/llms.txt`), with an optional `/llms-full.txt` companion.
+
+The [llms.txt standard](https://llmstxt.org) is a Markdown file that gives a model a curated map of the site: an `# H1` name, an optional `>` summary, and `## H2` sections of `[link](url): description` entries. `llms-full.txt` inlines the key pages' content so a model can ingest the whole site in one fetch.
+
+**Audit Criteria:**
+- [ ] `/llms.txt` exists at the site root
+- [ ] Valid shape: single H1, sections as H2 link lists, absolute URLs
+- [ ] Curated (important pages, not the whole sitemap) with honest descriptions
+- [ ] Current: links match the live sitemap/routes
+- [ ] `/llms-full.txt` present for docs/content-heavy sites
+
+**Issue Severity:**
+- Missing `/llms.txt`: WARNING (invisible to AI answer engines that look for it)
+- Invalid shape or broken/relative URLs: ERROR
+- Stale or uncurated: WARNING
+- Missing `/llms-full.txt`: INFO
+
+For a deep pass on this dimension, and to generate a compliant file from the site's real pages, use the dedicated `/llms-audit` command.
+
+#### AI-crawler access
+
+An llms.txt is pointless if `robots.txt` blocks the agents that would read it. Check how the major AI user-agents are treated: `GPTBot`, `OAI-SearchBot`, `ChatGPT-User` (OpenAI); `ClaudeBot`, `Claude-User` (Anthropic); `PerplexityBot`; `Google-Extended` (Gemini); `CCBot` (Common Crawl).
+
+**Audit Criteria:**
+- [ ] AI user-agents are not unintentionally blocked
+- [ ] Any block is a deliberate, confirmable owner choice
+- [ ] User-initiated agents allowed if the site wants to appear in AI answers
+
+**Issue Severity:**
+- AI bots blocked while the site wants AI visibility: WARNING (report; never silently unblock)
+- Inconsistent policy across bots with no clear intent: INFO
+
+Blocking or allowing AI crawlers is an owner policy decision (licensing, cost, privacy). Report the current state and the tradeoff; do not change it.
+
+#### Answer-ready structure
+
+AI systems extract answers more reliably from structured, semantic, server-rendered content.
+
+**Audit Criteria:**
+- [ ] Important content is in the server-rendered HTML (not JS-only)
+- [ ] Answer-shaped content uses `FAQPage` / `QAPage` / `HowTo` schema
+- [ ] Clear heading hierarchy an extractor can follow
+- [ ] Canonical URLs so models attribute content to one source
+
+**Issue Severity:**
+- Key content client-side-only (empty initial HTML): ERROR (many AI crawlers do not run JS)
+- No structured data on answer-shaped content: WARNING
+
 ---
 
 ## Audit Report Format
@@ -377,6 +431,7 @@ Generate a comprehensive report with the following structure:
 | Links | X | X | X | X |
 | Technical Files | X | X | X | X |
 | Structured Data | X | X | X | X |
+| AI Discoverability | X | X | X | X |
 
 ## Detailed Findings
 
