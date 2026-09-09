@@ -716,6 +716,36 @@
         "workflow"
       ],
       "strict": false
+    },
+    {
+      "name": "me-review",
+      "description": "Twelve structured monitoring and evaluation document reviews: logframes, theories of change, indicators, evaluation TORs, M&E plans, proposals, sampling plans, surveys, baseline reports, progress reports, data quality assessments, and evaluation reports. Each returns section-by-section PASS/PARTIAL/FAIL ratings, a summary verdict, and prioritized recommendations.",
+      "version": "1.4.0",
+      "author": {
+        "name": "MEStudio",
+        "url": "https://www.monitoringevaluationstudio.com"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/monitoringevaluationstudio/me-review.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "647710577829a1454d33d75591d8b269f799eb6b"
+      },
+      "category": "analysis",
+      "homepage": "https://www.monitoringevaluationstudio.com/plugins",
+      "repository": "https://github.com/monitoringevaluationstudio/me-review",
+      "license": "MIT",
+      "keywords": [
+        "monitoring-evaluation",
+        "meal",
+        "evaluation",
+        "logframe",
+        "theory-of-change",
+        "international-development",
+        "nonprofit"
+      ],
+      "strict": false
     }
   ]
 }
