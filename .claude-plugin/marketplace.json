@@ -232,6 +232,38 @@
       ]
     },
     {
+      "name": "responsive-design-kit",
+      "description": "Audit and fix a website's mobile responsiveness from source: find fixed-width layouts, horizontal-overflow risks, viewport and touch-target problems, then apply risk-scored fixes as reviewable diffs without breaking your desktop layout",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sigistry"
+      },
+      "source": "./plugins/responsive-design-kit",
+      "category": "optimization",
+      "homepage": "https://sigistry.com/plugin/responsive-design-kit",
+      "license": "MIT",
+      "keywords": [
+        "responsive-design",
+        "mobile-friendly",
+        "mobile-first",
+        "media-queries",
+        "css",
+        "viewport",
+        "touch-targets",
+        "frontend",
+        "web-performance",
+        "accessibility"
+      ],
+      "strict": true,
+      "commands": [
+        "./commands/responsive-audit.md",
+        "./commands/responsive-fix.md"
+      ],
+      "skills": [
+        "./skills/responsive-design-expert/SKILL.md"
+      ]
+    },
+    {
       "name": "plugin-benchmarker",
       "description": "Benchmark Claude Code plugins by validating structure, reviewing skill quality, and comparing with-skill vs without-skill performance with per-file KEEP/TRIM/DELETE recommendations",
       "version": "1.0.0",

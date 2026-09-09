@@ -1,0 +1,10 @@
+{
+  "name": "responsive-design-kit",
+  "version": "1.0.0",
+  "description": "Audit and fix a website's mobile responsiveness from source: find fixed-width layouts, horizontal-overflow risks, viewport and touch-target problems, then apply risk-scored fixes as reviewable diffs without breaking your desktop layout",
+  "author": {
+    "name": "Sigistry",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/responsive-design-kit"
+  },
+  "license": "MIT"
+}
