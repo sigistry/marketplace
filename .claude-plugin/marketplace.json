@@ -7,6 +7,32 @@
   },
   "plugins": [
     {
+      "name": "aidelly-social-autopilot",
+      "description": "Create, schedule, approve, and analyze social media content across connected platforms via Aidelly's public MCP server.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Aidelly",
+        "url": "https://github.com/Aidelly"
+      },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Aidelly/claude-plugin.git"
+      },
+      "category": "marketing",
+      "homepage": "https://aidelly.ai",
+      "repository": "https://github.com/Aidelly/claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "social-media",
+        "marketing",
+        "content",
+        "scheduling",
+        "analytics",
+        "mcp"
+      ],
+      "strict": false
+    },
+    {
       "name": "code-auditor",
       "description": "Comprehensive code auditing and assessment plugin with security, architecture, and performance analysis capabilities",
       "version": "1.0.2",
