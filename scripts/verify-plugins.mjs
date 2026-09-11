@@ -700,6 +700,53 @@ for (const name of orphanDirs) {
   console.log(`FAILED    ${name} (vendored under plugins/ but not listed in marketplace.json)`);
 }
 
+// ---------------------------------------------------------------------------
+// Attestations: external plugins we security-verify but do NOT list in the
+// catalog (see the external-attestation strategy). Same eight checks at a
+// pinned commit, but they earn a scoped "code-verified" badge and a
+// verification page instead of a catalog slot, and never appear in
+// marketplace.json. Kept in a separate file so listing and attestation can
+// never be confused. Their verified.json entries carry tier: "attested".
+// ---------------------------------------------------------------------------
+const attestationsPath = path.join(ROOT, '.claude-plugin', 'attestations.json');
+let attestedTotal = 0;
+let attestedFailures = 0;
+if (exists(attestationsPath)) {
+  const att = JSON.parse(read(attestationsPath));
+  for (const entry of att.attestations ?? []) {
+    attestedTotal++;
+    // A name already in result.plugins is a listed plugin; an attestation must
+    // never silently overwrite a catalog listing's verification record.
+    if (result.plugins[entry.name]) {
+      attestedFailures++;
+      console.log(`FAILED    ${entry.name} (attested: name collides with a listed plugin; attestations must not be listed)`);
+      continue;
+    }
+    const date = result.generated.slice(0, 10);
+    const base = { tier: 'attested', hosting: 'external', version: entry.version, date, firstSeen: firstSeenOf(entry.name) };
+    const fail = (note, extra = {}) => {
+      result.plugins[entry.name] = { status: 'failed', ...base, checks: [], note, ...extra };
+      attestedFailures++;
+      console.log(`FAILED    ${entry.name} (attested: ${note})`);
+    };
+    const pin = pinFromSource(entry);
+    if (!pin) { fail('needs a git-subdir source with a sha'); continue; }
+    const pinErr = validatePin(entry.name, pin);
+    if (pinErr) { fail(`invalid pin: ${pinErr}`); continue; }
+    try {
+      const { ok, checks, headCommit, current } = verifyExternal(entry, pin);
+      const status = !ok ? 'failed' : current === false ? 'stale' : 'verified';
+      result.plugins[entry.name] = { status, ...base, repo: pin.repo, commit: pin.commit, path: pin.path ?? '.', headCommit, checks };
+      if (!ok) attestedFailures++;
+      const tag = status === 'verified' ? 'ATTESTED' : status === 'stale' ? 'STALE   ' : 'FAILED  ';
+      console.log(`${tag}  ${entry.name} (attested @${pin.commit.slice(0, 7)}${current === false ? ', repo HEAD has moved on' : ''})`);
+      for (const c of checks.filter((c) => c.status === 'fail')) console.log(`          - ${c.title}: ${c.detail}`);
+    } catch (e) {
+      fail(`could not fetch pinned commit: ${String(e.message ?? e).slice(0, 160)}`, { repo: pin.repo, commit: pin.commit });
+    }
+  }
+}
+
 const verifiedPath = path.join(ROOT, '.claude-plugin', 'verified.json');
 
 if (ciMode) {
@@ -718,15 +765,18 @@ if (ciMode) {
   } else {
     stale.push('(verified.json missing)');
   }
-  if (failures > 0) console.error(`\nCI: ${failures} plugin(s) fail verification.`);
+  if (failures + attestedFailures > 0) console.error(`\nCI: ${failures + attestedFailures} plugin(s)/attestation(s) fail verification.`);
   if (stale.length > 0)
     console.error(
       `CI: committed verified.json is stale for: ${stale.join(', ')}. Run "node scripts/verify-plugins.mjs" and commit the result.`
     );
-  if (failures > 0 || stale.length > 0) process.exit(1);
+  if (failures + attestedFailures > 0 || stale.length > 0) process.exit(1);
   console.log('\nCI: all plugins verified and verified.json is current.');
   process.exit(0);
 }
 
 fs.writeFileSync(verifiedPath, JSON.stringify(result, null, 2) + '\n');
 console.log(`\n${marketplace.plugins.length - failures}/${marketplace.plugins.length} plugins verified. Wrote .claude-plugin/verified.json`);
+if (attestedTotal > 0) {
+  console.log(`${attestedTotal - attestedFailures}/${attestedTotal} attestation(s) verified (external, not listed).`);
+}

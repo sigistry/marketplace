@@ -1,0 +1,4 @@
+{
+  "$comment": "External plugins we security-verify but do NOT list in the catalog. They earn a scoped 'code-verified' badge and a verification page (not a catalog slot), pinned to a commit. Same eight checks as the catalog. Money is never involved. A 'code-verified' badge attests the plugin's OWN code only, never any external/paid service it connects to; thin clients to closed hosted backends do not qualify (nothing local to audit). Entry shape mirrors an external marketplace entry: name, description, author, homepage, and a git-subdir source with a sha.",
+  "attestations": []
+}
