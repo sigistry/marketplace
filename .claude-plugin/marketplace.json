@@ -778,6 +778,34 @@
         "nonprofit"
       ],
       "strict": false
+    },
+    {
+      "name": "hermes-blind",
+      "description": "Recover the original goal of a long Claude Code or Codex session with a local, inspectable recovery anchor.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Hermes Labs",
+        "url": "https://hermes-labs.ai"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/hermes-labs-ai/hermes-blind.git",
+        "path": "claude-plugin",
+        "ref": "main",
+        "sha": "580e826a9f1806ef9bee699b3afc860e5e71e6bb"
+      },
+      "category": "development",
+      "homepage": "https://hermes-labs.ai/open-source",
+      "repository": "https://github.com/hermes-labs-ai/hermes-blind",
+      "license": "MIT",
+      "keywords": [
+        "claude-code",
+        "codex",
+        "session-recovery",
+        "context-management",
+        "agent-workflows"
+      ],
+      "strict": true
     }
   ]
 }
