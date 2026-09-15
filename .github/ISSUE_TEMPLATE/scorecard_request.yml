@@ -1,0 +1,76 @@
+name: Request a scorecard
+description: Ask Sigistry to grade (or re-grade) a public MCP server against the scorecard rubric.
+title: "[scorecard] "
+labels: ["scorecard"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Scorecards grade a public MCP server against the [published, versioned rubric](https://github.com/Sigistry/marketplace/blob/main/scorecards/RUBRIC.md).
+        Grading is **static analysis only**, from the public repository **at one pinned commit** — we never probe live endpoints without permission, and nothing from the repository is executed.
+        If you are the maintainer, the draft goes to you for a response before anything is published. Exploitable findings are handled privately first via [security advisories](https://github.com/Sigistry/marketplace/security/advisories/new), never published as a zero-day.
+  - type: input
+    id: repository
+    attributes:
+      label: Repository
+      description: The public GitHub repository of the MCP server.
+      placeholder: owner/name
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit to grade
+      description: The exact commit SHA to grade. Scorecards are commit-addressed and describe that commit only.
+      placeholder: e.g. d393747ca86664919f84fa3ed24950a121088ed1
+    validations:
+      required: true
+  - type: input
+    id: endpoint
+    attributes:
+      label: Hosted endpoint (optional)
+      description: The server's hosted URL, if it has one. Used for context only, not probed without permission.
+      placeholder: https://...
+    validations:
+      required: false
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Transport
+      description: How the server is reached. Helps scope the transport axis.
+      options:
+        - Not sure
+        - Local stdio
+        - Streamable HTTP
+        - Legacy HTTP+SSE
+        - Other
+    validations:
+      required: false
+  - type: dropdown
+    id: maintainer
+    attributes:
+      label: Are you the maintainer?
+      description: Maintainers get the draft to respond to before it is published.
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else we should know?
+      description: Published package name, self-host modes, auth model, or anything that affects how it should be graded.
+    validations:
+      required: false
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Before you submit
+      options:
+        - label: I understand the grade is static-only, from the public repository at the commit above, and describes that commit.
+          required: true
+        - label: I understand it is graded against the published rubric, and a re-grade at a newer commit is one issue away.
+          required: true
+        - label: If this reveals an exploitable issue, I understand it will be handled through private disclosure first, not this public issue.
+          required: true
