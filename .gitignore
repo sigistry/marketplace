@@ -38,3 +38,7 @@ temp/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Internal ops tooling (outreach scripts, etc.). Kept locally, not published
+# to this public repo.
+.infra/

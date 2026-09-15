@@ -7,8 +7,8 @@
       "name": "Sigistry Plugin Catalog",
       "endpoint": "https://sigistry.com/mcp",
       "repo": "Sigistry/mcp-server",
-      "commit": "0f582454819af8587d02d635c881d2666ad12c92",
-      "date": "2026-08-06",
+      "commit": "758d69f95cfbfd138e58bcf24481474b3006e18f",
+      "date": "2026-09-14",
       "grade": "A",
       "selfAssessment": true,
       "axes": [
@@ -28,7 +28,7 @@
           "id": "lifecycle",
           "title": "Lifecycle and protocol version",
           "status": "pass",
-          "evidence": "@modelcontextprotocol/sdk 1.29.x handles initialize/negotiation; the only declared capability (tools) is fully implemented (4 tools, all handlers live)."
+          "evidence": "@modelcontextprotocol/sdk handles initialize/negotiation; the only declared capability (tools) is fully implemented (8 tools, all handlers live)."
         },
         {
           "id": "authorization",
@@ -40,7 +40,7 @@
           "id": "tool-design",
           "title": "Tool design",
           "status": "pass",
-          "evidence": "Complete zod input/output schemas with per-field descriptions; honest annotations (all four tools readOnlyHint, none open-world: verify_plugin returns static instructions); structured isError results; search output capped at 15 rows."
+          "evidence": "Complete zod input/output schemas with per-field descriptions; honest annotations (all eight tools readOnlyHint, none open-world: verify_plugin returns static instructions, scorecards and skills read cached or static data); structured isError results; search output capped at 15 rows."
         },
         {
           "id": "security-hygiene",
