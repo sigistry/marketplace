@@ -7,7 +7,7 @@
       "name": "Sigistry Plugin Catalog",
       "endpoint": "https://sigistry.com/mcp",
       "repo": "Sigistry/mcp-server",
-      "commit": "758d69f95cfbfd138e58bcf24481474b3006e18f",
+      "commit": "d393747ca86664919f84fa3ed24950a121088ed1",
       "date": "2026-09-14",
       "grade": "A",
       "selfAssessment": true,
