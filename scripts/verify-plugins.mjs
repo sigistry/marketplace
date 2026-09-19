@@ -24,14 +24,31 @@ const METHODOLOGY_VERSION = '1.2';
 const read = (p) => fs.readFileSync(p, 'utf8');
 const exists = (p) => fs.existsSync(p);
 
-/** Parse the YAML-ish frontmatter block of a .md file into a flat map (regex, v1). */
+/** Parse the YAML-ish frontmatter block of a .md file into a flat map (regex, v1).
+ * Handles single-line scalars plus YAML block scalars (`key: >` folded / `key: |`
+ * literal, with optional +/- chomping): the value is the following indented lines,
+ * which a naive line-by-line parse would drop (leaving the value as just ">" and
+ * mis-reading a rich multi-line description as empty). */
 function frontmatter(md) {
   const m = md.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!m) return null;
   const out = {};
-  for (const line of m[1].split(/\r?\n/)) {
-    const kv = line.match(/^([A-Za-z_-]+):\s*(.*)$/);
-    if (kv) out[kv[1].toLowerCase()] = kv[2].trim();
+  const lines = m[1].split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const kv = lines[i].match(/^([A-Za-z_-]+):\s*(.*)$/);
+    if (!kv) continue;
+    const key = kv[1].toLowerCase();
+    let val = kv[2].trim();
+    // Block scalar indicator (`>`, `|`, `>-`, `|+`, ...): fold the following
+    // indented (or blank) lines into the value.
+    if (/^[|>][+-]?$/.test(val)) {
+      const block = [];
+      while (i + 1 < lines.length && (lines[i + 1].trim() === '' || /^\s/.test(lines[i + 1]))) {
+        block.push(lines[++i].trim());
+      }
+      val = block.join(' ').trim();
+    }
+    out[key] = val;
   }
   return out;
 }
