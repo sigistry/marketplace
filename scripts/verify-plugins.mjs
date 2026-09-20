@@ -394,10 +394,15 @@ function checkSkillSafety(pluginDir) {
     const fm = frontmatter(src) ?? {};
 
     // -- Name discipline: matches directory, safe charset, shadows nothing.
+    // Charset allows mixed case: Claude Code's docs treat lowercase-hyphen as a
+    // convention, not a hard rule (it normalizes case when comparing names), so
+    // an uppercase name like "FlowForge" loads fine. We still reject spaces and
+    // special characters (the genuinely unsafe forms); the lowercase convention
+    // is a recommendation we surface, not a verification blocker.
     if (fm.name && fm.name !== s.name)
       problems.push(`${label}: frontmatter name "${fm.name}" != directory name`);
-    if (fm.name && !/^[a-z0-9-]+$/.test(fm.name))
-      problems.push(`${label}: name must be lowercase alphanumeric with hyphens`);
+    if (fm.name && !/^[A-Za-z0-9-]+$/.test(fm.name))
+      problems.push(`${label}: name must be alphanumeric with hyphens (no spaces or special characters)`);
     const skillName = fm.name || s.name;
     if (BUILTIN_COMMANDS.has(skillName))
       problems.push(`${label}: shadows built-in Claude Code command "/${skillName}"`);
