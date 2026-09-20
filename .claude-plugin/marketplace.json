@@ -806,6 +806,95 @@
         "agent-workflows"
       ],
       "strict": true
+    },
+    {
+      "name": "kit-ship-check",
+      "description": "Pre-commit gate: runs test, lint and type check and prints a PASS/FAIL table. A check that could not run counts as FAIL, not as a pass.",
+      "version": "0.1.0",
+      "author": {
+        "name": "SDV Signal",
+        "url": "https://github.com/sdvsignal"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/sdvsignal/kit-plugins.git",
+        "path": "plugins/kit-ship-check",
+        "ref": "main",
+        "sha": "240a2fd09078e05d440a93d5b462977080718b76"
+      },
+      "category": "testing",
+      "homepage": "https://github.com/sdvsignal/kit-plugins",
+      "repository": "https://github.com/sdvsignal/kit-plugins",
+      "license": "MIT",
+      "keywords": [
+        "ship-check",
+        "pre-commit",
+        "tests",
+        "lint",
+        "type-check",
+        "ci",
+        "quality-gate"
+      ],
+      "strict": false
+    },
+    {
+      "name": "kit-explain-diff",
+      "description": "Plain-English read of your git diff before you push, with the risky lines called out as file:line and the blast radius stated.",
+      "version": "0.1.0",
+      "author": {
+        "name": "SDV Signal",
+        "url": "https://github.com/sdvsignal"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/sdvsignal/kit-plugins.git",
+        "path": "plugins/kit-explain-diff",
+        "ref": "main",
+        "sha": "240a2fd09078e05d440a93d5b462977080718b76"
+      },
+      "category": "git",
+      "homepage": "https://github.com/sdvsignal/kit-plugins",
+      "repository": "https://github.com/sdvsignal/kit-plugins",
+      "license": "MIT",
+      "keywords": [
+        "git",
+        "diff",
+        "code-review",
+        "pull-request",
+        "explain",
+        "pre-push"
+      ],
+      "strict": false
+    },
+    {
+      "name": "kit-storekit-check",
+      "description": "Six offline StoreKit and Xcode pre-flight checks for iOS subscription apps: bundled .storekit file, distantFuture expiry, product ID drift, local-only intro offers, export compliance key, prices in metadata.",
+      "version": "0.1.0",
+      "author": {
+        "name": "SDV Signal",
+        "url": "https://github.com/sdvsignal"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/sdvsignal/kit-plugins.git",
+        "path": "plugins/kit-storekit-check",
+        "ref": "main",
+        "sha": "240a2fd09078e05d440a93d5b462977080718b76"
+      },
+      "category": "testing",
+      "homepage": "https://github.com/sdvsignal/kit-plugins",
+      "repository": "https://github.com/sdvsignal/kit-plugins",
+      "license": "MIT",
+      "keywords": [
+        "ios",
+        "storekit",
+        "app-store",
+        "subscriptions",
+        "in-app-purchase",
+        "xcode",
+        "pre-flight"
+      ],
+      "strict": false
     }
   ]
 }
