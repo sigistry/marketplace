@@ -1284,12 +1284,12 @@
       ]
     },
     "kit-ship-check": {
-      "status": "verified",
+      "status": "stale",
       "hosting": "external",
       "repo": "sdvsignal/kit-plugins",
       "commit": "aec73e32471fd075b637a9be8ab5090047cadf75",
       "path": "plugins/kit-ship-check",
-      "headCommit": "aec73e32471fd075b637a9be8ab5090047cadf75",
+      "headCommit": "8274280ebfb4f1b434db0a677cfc57f075a61562",
       "version": "0.1.0",
       "date": "2026-09-21",
       "firstSeen": "2026-09-20",
@@ -1345,12 +1345,12 @@
       ]
     },
     "kit-explain-diff": {
-      "status": "verified",
+      "status": "stale",
       "hosting": "external",
       "repo": "sdvsignal/kit-plugins",
       "commit": "aec73e32471fd075b637a9be8ab5090047cadf75",
       "path": "plugins/kit-explain-diff",
-      "headCommit": "aec73e32471fd075b637a9be8ab5090047cadf75",
+      "headCommit": "8274280ebfb4f1b434db0a677cfc57f075a61562",
       "version": "0.1.0",
       "date": "2026-09-21",
       "firstSeen": "2026-09-20",
@@ -1406,12 +1406,12 @@
       ]
     },
     "kit-storekit-check": {
-      "status": "verified",
+      "status": "stale",
       "hosting": "external",
       "repo": "sdvsignal/kit-plugins",
       "commit": "aec73e32471fd075b637a9be8ab5090047cadf75",
       "path": "plugins/kit-storekit-check",
-      "headCommit": "aec73e32471fd075b637a9be8ab5090047cadf75",
+      "headCommit": "8274280ebfb4f1b434db0a677cfc57f075a61562",
       "version": "0.1.0",
       "date": "2026-09-21",
       "firstSeen": "2026-09-20",
