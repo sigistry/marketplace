@@ -18,7 +18,7 @@ Match the register, too. A playful blog post, a legal memo, and a terminal READM
 
 1. Read the target (a file the user names, a pasted passage, or the draft in progress).
 2. Find the tells. Prioritize clusters and register over lone words.
-3. Report each finding on one line: `location — pattern — why it reads as AI — a concrete rewrite`.
+3. For each finding, give four parts: its location, the pattern, why it reads as AI, and a concrete rewrite. Lay them out plainly (a short labeled line or a list). Do not string the parts together with em dashes, since this tool flags exactly that.
 4. Offer a cleaned version of the worst paragraph so the fix is obvious.
 5. Stay advisory. Do not rewrite the file unless the user asks. Preserve meaning, facts, and citations.
 
