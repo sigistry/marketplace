@@ -1,0 +1,12 @@
+{
+  "name": "slop-check",
+  "version": "1.0.0",
+  "description": "Catch AI-slop writing tells and rewrite prose to a genuine human voice. Flags cliché clusters, promotional register, formulaic structure, and em-dash or emoji overuse, then suggests fixes. A craft tool for cleaner writing, not a detector-evader.",
+  "author": {
+    "name": "Sigistry",
+    "url": "https://github.com/Sigistry/marketplace/tree/main/plugins/slop-check"
+  },
+  "homepage": "https://sigistry.com/plugin/slop-check",
+  "repository": "https://github.com/Sigistry/marketplace",
+  "license": "MIT"
+}

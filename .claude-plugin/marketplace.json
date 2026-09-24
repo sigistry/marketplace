@@ -895,6 +895,31 @@
         "pre-flight"
       ],
       "strict": false
+    },
+    {
+      "name": "slop-check",
+      "description": "Catch AI-slop writing tells and rewrite prose to a genuine human voice. Flags cliché clusters, promotional register, formulaic structure, and em-dash or emoji overuse, then suggests fixes. A craft tool for cleaner writing, not a detector-evader.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sigistry"
+      },
+      "source": "./plugins/slop-check",
+      "category": "documentation",
+      "homepage": "https://sigistry.com/plugin/slop-check",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "ai-slop",
+        "content-quality",
+        "editing",
+        "style",
+        "prose",
+        "human-voice"
+      ],
+      "strict": true,
+      "skills": [
+        "./skills/audit/SKILL.md"
+      ]
     }
   ]
 }
