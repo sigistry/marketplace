@@ -8,7 +8,7 @@ Comprehensive SEO plugin for Claude Code. Audit, optimize, and review website co
 
 The SEO Optimizer plugin helps developers and content creators implement SEO best practices directly from the command line. It audits existing SEO implementation, optimizes content for search, and applies precision micro-edits that improve discoverability without altering the original voice or style.
 
-**New in 1.1.0: AI discoverability.** Search is no longer only ten blue links. ChatGPT, Claude, Perplexity, and Google AI Overviews read sites too, and they look for signals classic SEO ignores. The plugin now generates and validates [llms.txt](https://llmstxt.org), checks AI-crawler access in robots.txt (GPTBot, ClaudeBot, PerplexityBot, Google-Extended), and flags content that AI crawlers cannot read. Run `/llms-audit` for the full pass.
+**New in 1.1.0: AI discoverability.** Search is no longer only ten blue links. ChatGPT, Claude, Perplexity, and Google AI Overviews read sites too, and they look for signals classic SEO ignores. The plugin now generates and validates [llms.txt](https://llmstxt.org), checks AI-crawler access in robots.txt (GPTBot, ClaudeBot, PerplexityBot, Google-Extended), and flags content that AI crawlers cannot read. Run `/seo-optimizer:llms-audit` for the full pass.
 
 ## Installation
 
@@ -24,19 +24,19 @@ The SEO Optimizer plugin helps developers and content creators implement SEO bes
 
 ### Commands
 
-#### `/seo-audit` - SEO Compliance Audit
+#### `/seo-optimizer:seo-audit` - SEO Compliance Audit
 
 Perform a comprehensive SEO audit on HTML files or web applications.
 
 ```bash
 # Audit a specific file
-/seo-audit src/index.html
+/seo-optimizer:seo-audit src/index.html
 
 # Audit an entire directory
-/seo-audit ./public
+/seo-optimizer:seo-audit ./public
 
 # Audit a Next.js app
-/seo-audit app/layout.tsx
+/seo-optimizer:seo-audit app/layout.tsx
 ```
 
 **What it checks:**
@@ -49,16 +49,16 @@ Perform a comprehensive SEO audit on HTML files or web applications.
 - Canonical URLs
 - Structured data (Schema.org)
 
-#### `/seo-optimize` - Content Optimization
+#### `/seo-optimizer:seo-optimize` - Content Optimization
 
 Apply minimal, high-precision SEO edits to improve organic search performance.
 
 ```bash
 # Optimize a content file
-/seo-optimize content/blog/my-article.md
+/seo-optimizer:seo-optimize content/blog/my-article.md
 
 # Optimize an HTML page
-/seo-optimize pages/about.html
+/seo-optimizer:seo-optimize pages/about.html
 ```
 
 **What it does:**
@@ -68,13 +68,13 @@ Apply minimal, high-precision SEO edits to improve organic search performance.
 - Adds internal linking opportunities
 - Preserves original voice and tone
 
-#### `/seo-reviewer` - Micro-Edit Review
+#### `/seo-optimizer:seo-reviewer` - Micro-Edit Review
 
 Apply minimal SEO micro-edits as part of a content review pipeline. Stricter than optimize, with a 5% character change limit.
 
 ```bash
 # Review and apply micro-edits
-/seo-reviewer content/landing-page.md
+/seo-optimizer:seo-reviewer content/landing-page.md
 ```
 
 **Constraints:**
@@ -83,16 +83,16 @@ Apply minimal SEO micro-edits as part of a content review pipeline. Stricter tha
 - YMYL content protection (health/finance/legal)
 - No fabrication of facts or data
 
-#### `/llms-audit` - AI Discoverability & llms.txt
+#### `/seo-optimizer:llms-audit` - AI Discoverability & llms.txt
 
 Audit whether your site is legible to AI answer engines and agents, and generate a compliant `llms.txt` when one is missing.
 
 ```bash
 # Audit a local project (finds the web root)
-/llms-audit ./
+/seo-optimizer:llms-audit ./
 
 # Audit a live site
-/llms-audit https://example.com
+/seo-optimizer:llms-audit https://example.com
 ```
 
 **What it does:**
@@ -130,7 +130,7 @@ Activate the SEO Expert skill for interactive consultation on SEO topics.
 Start by auditing your current SEO implementation:
 
 ```bash
-/seo-audit ./src
+/seo-optimizer:seo-audit ./src
 ```
 
 This generates a comprehensive report with:
@@ -154,7 +154,7 @@ SEO Expert: [Provides framework-specific implementation guidance]
 Run the optimizer on content pages:
 
 ```bash
-/seo-optimize content/services.md
+/seo-optimizer:seo-optimize content/services.md
 ```
 
 Review the changes and apply them to your files.
@@ -164,7 +164,7 @@ Review the changes and apply them to your files.
 Before publishing, run the micro-editor for final polish:
 
 ```bash
-/seo-reviewer content/services.md
+/seo-optimizer:seo-reviewer content/services.md
 ```
 
 This applies conservative, high-precision edits that won't alter your voice.
