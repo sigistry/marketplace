@@ -920,6 +920,35 @@
       "skills": [
         "./skills/audit/SKILL.md"
       ]
+    },
+    {
+      "name": "yylo-skills",
+      "description": "Companion skills for the `yy` CLI (npm `@yylo/cli`): the skills instruct an agent to run `yy` commands for YYLO Ledger tasks, Kanban, wiki, workflow and artifact records, project understanding, planning, benchmark studies, and the Ralph loop. Canonical, independently versioned source of the skills used by YYLO CLI and YYLO Ledger. Runtime note: the `yy` CLI stores workspace state under `.juno_task/` and routes controllers via `JUNO_TASK_ROOT` (its current documented contract; see yylo-dev/yylo).",
+      "version": "2.1.1",
+      "author": {
+        "name": "YYLO",
+        "url": "https://yylo.dev"
+      },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/yylo-dev/yylo-skills.git"
+      },
+      "category": "development",
+      "homepage": "https://yylo.dev",
+      "repository": "https://github.com/yylo-dev/yylo-skills",
+      "license": "MIT",
+      "keywords": [
+        "skills",
+        "agent-skills",
+        "yylo",
+        "ledger",
+        "kanban",
+        "task-management",
+        "claude-code",
+        "codex",
+        "pi"
+      ],
+      "strict": false
     }
   ]
 }
