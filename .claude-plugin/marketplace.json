@@ -920,6 +920,35 @@
       "skills": [
         "./skills/audit/SKILL.md"
       ]
+    },
+    {
+      "name": "flowforge-skill",
+      "description": "Generate professional draw.io diagrams from natural language: flowcharts, architecture diagrams, comparisons, and more.",
+      "version": "1.2.0",
+      "author": {
+        "name": "winstonyoyo",
+        "url": "https://github.com/wentong2022-arch"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/wentong2022-arch/flowforge-skill.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "7a210ccb6f3724f91e15d614726de0be25f9e1a6"
+      },
+      "category": "documentation",
+      "homepage": "https://github.com/wentong2022-arch/flowforge-skill",
+      "repository": "https://github.com/wentong2022-arch/flowforge-skill",
+      "license": "MIT",
+      "keywords": [
+        "drawio",
+        "diagram",
+        "flowchart",
+        "architecture-diagram",
+        "visualization",
+        "claude-skill"
+      ],
+      "strict": false
     }
   ]
 }
