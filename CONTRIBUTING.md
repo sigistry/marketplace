@@ -55,11 +55,18 @@ your-plugin-name/
 
 Skills are held to the [skill-safety check](https://sigistry.com/skill-verification), because a SKILL.md is injected into the agent's context when it triggers:
 
-- **Name**: lowercase alphanumeric with hyphens, exactly matching the directory name; must not shadow a built-in Claude Code command or one of your own commands
+- **Name**: alphanumeric with hyphens, exactly matching the directory name; must not shadow a built-in Claude Code command or one of your own commands. Lowercase-with-hyphens is the convention we recommend, and mixed case is accepted (Claude Code normalizes case when it matches names)
 - **Description**: an honestly-scoped trigger describing when the skill applies (no "use on every request")
 - **Content**: no instruction-override, concealment, or exfiltration language; documentation that teaches attack patterns defensively is fine
 - **Scripts**: nothing that pipes remote content to a shell, decodes hidden payloads, touches credential files, or sends secrets off-machine; matches inside security-detector definitions and test fixtures are recorded as accepted context, not failed
 - Container layouts (`skills/<container>/<variant>/SKILL.md`, e.g. i18n packs) are supported
+
+#### If your plugin ships hooks or agents
+
+Two of the eight checks apply here:
+
+- **Hooks** must be advisory-only. Reference scripts through `${CLAUDE_PLUGIN_ROOT}`, and keep them to read-only work: no network calls, no filesystem writes, no reading credential files, and any subprocess limited to constant, read-only git commands. Each script needs a fail-safe (a `try`/`catch` and an unconditional `exit(0)`) so a hook can never block the session.
+- **Agents** must declare an explicit `tools` list rather than inheriting every tool. An agent whose stated job is analysis (audit, review, scan, report) must not carry `Write` or `Edit`; only agents that exist to produce or change files should hold them.
 
 #### Required: plugin.json
 
@@ -167,6 +174,8 @@ Add your plugin to the `plugins` array using the Git URL format:
 
 **Important**: The `source` field tells Claude Code where to find your plugin. The Git URL format shown above supports any Git hosting service (GitHub, GitLab, Bitbucket, self-hosted, etc.) and gives you a **Listed** entry. To be **Verified at commit**, use the pinned `git-subdir` source in the [options below](#source-field-options) instead: it locks installs to the exact commit we verify.
 
+The `strict` field is read by Claude Code's plugin loader, not by our verifier. External entries (Listed and Verified at commit) set it to `false`; vendored (Verified) plugins in this repo set it to `true`.
+
 #### Source Field Options
 
 The source field supports several formats. Which one you pick sets your tier:
@@ -234,7 +243,7 @@ After submission:
    - Plugin repository accessibility
    - Plugin structure and metadata
    - marketplace.json syntax
-   - For vendored (Verified-tier) submissions: the full eight-check verification methodology, including a stale-`verified.json` gate
+   - For pinned (Verified at commit) and vendored (Verified) submissions: the full eight-check verification methodology, run against a clone of the pinned `sha` or the vendored code, including a stale-`verified.json` gate
 2. **Manual Review** - We'll review your plugin for:
    - Code quality and security
    - Functionality and usefulness
@@ -255,6 +264,8 @@ Passing the checks is necessary but not sufficient. We decline listings that:
 - Require payment or a paid account to deliver their core function
 - Gate basic functionality behind credentials to third-party services without clear, upfront disclosure
 - Violate the terms of service of the tools they integrate with
+- Ship their real payload as a fetch-and-run of a mutable remote artifact (for example a skill whose only step is `npm install <pkg>@latest && npx <pkg> init`), leaving no pinnable commit to read and letting the code change after review. Republish the plugin as a `git-subdir` source pinned to a tagged release and we will re-evaluate.
+- Deliver no standalone value: skills that are only usage notes for an external CLI or hosted product rather than work an agent can act on directly. Companion skills for a separate tool are welcome when the listing says so plainly and the skill bodies are self-consistent, with no stale paths, env vars, or half-finished renames from another product.
 - Conflict with the registry's values, even when the verifier passes cleanly; a clean static analysis does not obligate a listing
 
 Declines are explained, and authors are welcome to address the reason and resubmit.
@@ -292,17 +303,18 @@ We look for plugins that:
 
 ## Categories
 
-We organize plugins into categories:
-- **Security** - Security scanning, vulnerability analysis
-- **Testing** - Test generation, test runners
-- **Documentation** - Docs generation, API documentation
-- **Code Quality** - Linting, formatting, refactoring
-- **Performance** - Profiling, optimization
-- **DevOps** - CI/CD, deployment, infrastructure
-- **AI/ML** - Machine learning, data science tools
-- **Utilities** - General-purpose tools
+Set a single `category` on your entry. It decides where the plugin appears on the site: each recognized value maps to a homepage group. A value outside this set still lists, but lands under "Other" until a maintainer maps it.
 
-Choose appropriate tags for your plugin.
+| Homepage group | `category` values |
+|----------------|-------------------|
+| Code Quality | `auditing`, `testing`, `analysis`, `accessibility` |
+| Docs & Onboarding | `documentation`, `education`, `onboarding` |
+| Data & APIs | `data`, `database`, `api` |
+| DevOps & Git | `git`, `devops` |
+| Web & SEO | `seo`, `optimization` |
+| AI & MCP | `ai`, `mcp` |
+
+Add `keywords` for search; those are free-form.
 
 ## Versioning
 
@@ -329,7 +341,7 @@ To update an existing plugin:
 4. Update the version in marketplace.json (submit a PR to this repo)
 5. Include a clear changelog in your PR description
 
-Users will automatically get updates when they pull from your plugin repository.
+Listed plugins (unpinned Git-URL source) install from your repository's current HEAD, so users get changes as soon as you push. Verified-at-commit plugins are locked to the pinned `sha`: users stay on the reviewed commit until you bump it in a PR here, which re-runs verification against the new revision.
 
 ## Getting Help
 
