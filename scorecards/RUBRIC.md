@@ -1,4 +1,4 @@
-# MCP Server Scorecard Rubric v1.0
+# MCP Server Scorecard Rubric v1.1
 
 Sigistry grades public Model Context Protocol servers against the MCP
 2026-07-28 specification and baseline security practice. This rubric is
@@ -43,6 +43,15 @@ Each axis scores **pass**, **partial**, **fail**, or **n/a**, with evidence.
    injection from arguments; no secrets in the repository; request size,
    timeout, and rate controls proportionate to what the server can be made to
    do; CORS appropriate to the auth model.
+7. **UI / Apps extension.** Scored **n/a** for servers that expose no UI. For
+   servers implementing the MCP Apps extension (SEP-1865): UI resources use the
+   `ui://` scheme and the `text/html;profile=mcp-app` mimeType; tools link their
+   UI via `_meta.ui.resourceUri` to a resource the server actually exposes;
+   UI-enabled tools still return a text `content` fallback; `_meta.ui.csp`
+   declares every external origin the UI uses, with no wildcard connect origin;
+   the shipped UI holds no secrets and renders tool output and host messages
+   without unsafe DOM sinks (`innerHTML`, `eval`, `document.write`). A
+   self-exfiltration or stored-XSS path in a shipped UI is a security-axis fail.
 
 ## Grades
 
