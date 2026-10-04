@@ -1162,12 +1162,12 @@
       "note": "Hosted externally with no commit pin; listed but not verified."
     },
     "me-review": {
-      "status": "verified",
+      "status": "stale",
       "hosting": "external",
       "repo": "monitoringevaluationstudio/me-review",
       "commit": "647710577829a1454d33d75591d8b269f799eb6b",
       "path": ".",
-      "headCommit": "647710577829a1454d33d75591d8b269f799eb6b",
+      "headCommit": "4114fb88fad7ecb880e1714159aa28d93f9b7f07",
       "version": "1.4.0",
       "date": "2026-09-29",
       "firstSeen": "2026-09-10",
