@@ -657,7 +657,7 @@
     {
       "name": "search-visibility-kit",
       "description": "Connect Claude to Google Search Console, GA4 and IndexNow with live data: guided credential setup, evidence-based SEO audits, sitemap health checks, and delta URL submissions. One service account, unlimited sites.",
-      "version": "0.3.1",
+      "version": "0.3.3",
       "author": {
         "name": "Ezequiel Scholz",
         "url": "https://github.com/PapiScholz"
@@ -667,7 +667,7 @@
         "url": "https://github.com/PapiScholz/search-visibility-kit.git",
         "path": ".",
         "ref": "main",
-        "sha": "050933b08a42806dd2d2206a8286252e8e057132"
+        "sha": "167b01493cc34f77949092bafc818d900010af3b"
       },
       "category": "seo",
       "homepage": "https://github.com/PapiScholz/search-visibility-kit",
