@@ -949,6 +949,34 @@
         "claude-skill"
       ],
       "strict": false
+    },
+    {
+      "name": "curlshot",
+      "description": "Screenshots of any public web page as PNG, JPEG, WebP, PDF or a scrolling video: the hosted CurlShot MCP server (take_screenshot, list_devices) plus an agent skill for the HTTP API. Requires a CurlShot API key (free plan available).",
+      "version": "1.0.1",
+      "author": {
+        "name": "CurlShot",
+        "url": "https://curlshot.com"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/SergiuPogor/curlshot-mcp.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "c1c48aad739a17c6c476a2b35aa52bf4cad0445b"
+      },
+      "category": "mcp",
+      "homepage": "https://curlshot.com/docs/guides/ai-agents",
+      "repository": "https://github.com/SergiuPogor/curlshot-mcp",
+      "license": "MIT",
+      "keywords": [
+        "screenshot",
+        "web-capture",
+        "pdf",
+        "mcp",
+        "browser"
+      ],
+      "strict": false
     }
   ]
 }
