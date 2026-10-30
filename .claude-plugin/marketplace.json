@@ -752,21 +752,21 @@
     {
       "name": "me-review",
       "description": "Twelve structured monitoring and evaluation document reviews: logframes, theories of change, indicators, evaluation TORs, M&E plans, proposals, sampling plans, surveys, baseline reports, progress reports, data quality assessments, and evaluation reports. Each returns section-by-section PASS/PARTIAL/FAIL ratings, a summary verdict, and prioritized recommendations.",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": {
         "name": "MEStudio",
         "url": "https://www.monitoringevaluationstudio.com"
       },
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/monitoringevaluationstudio/me-review.git",
+        "url": "https://github.com/mestudiohq/me-review.git",
         "path": ".",
         "ref": "main",
-        "sha": "647710577829a1454d33d75591d8b269f799eb6b"
+        "sha": "49d95efba925ce9a6a9e1da83400c1aaaecf3668"
       },
       "category": "analysis",
       "homepage": "https://www.monitoringevaluationstudio.com/plugins",
-      "repository": "https://github.com/monitoringevaluationstudio/me-review",
+      "repository": "https://github.com/mestudiohq/me-review",
       "license": "MIT",
       "keywords": [
         "monitoring-evaluation",
@@ -774,6 +774,36 @@
         "evaluation",
         "logframe",
         "theory-of-change",
+        "international-development",
+        "nonprofit"
+      ],
+      "strict": false
+    },
+    {
+      "name": "me-workspace",
+      "description": "Monitoring and evaluation jobs on your project folder: twelve job skills (evaluation questions, question-method alignment, evaluation TOR drafts, indicator reference sheets, measurement feasibility, M&E plan drafts, progress evidence, findings to actions, results chain alignment, sampling plans, data quality assessment plans, baseline planning), three workflow packs and nineteen commands that cross-reference logframes, M&E plans, proposals, reports and TORs and write editable Markdown with source traceability.",
+      "version": "1.1.0",
+      "author": {
+        "name": "MEStudio",
+        "url": "https://www.monitoringevaluationstudio.com"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/mestudiohq/me-review.git",
+        "path": "plugins/me-workspace",
+        "ref": "main",
+        "sha": "49d95efba925ce9a6a9e1da83400c1aaaecf3668"
+      },
+      "category": "analysis",
+      "homepage": "https://www.monitoringevaluationstudio.com/plugins",
+      "repository": "https://github.com/mestudiohq/me-review",
+      "license": "MIT",
+      "keywords": [
+        "monitoring-evaluation",
+        "meal",
+        "evaluation",
+        "indicators",
+        "logframe",
         "international-development",
         "nonprofit"
       ],
