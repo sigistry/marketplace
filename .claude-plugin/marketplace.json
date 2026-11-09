@@ -979,6 +979,32 @@
         "claude-skill"
       ],
       "strict": false
+    },
+    {
+      "name": "claim-check",
+      "description": "Claude Code Stop hook that blocks fixed/done claims with no evidence in the session and asks for proof.",
+      "version": "0.5.0",
+      "author": {
+        "name": "Balance Zhao",
+        "url": "https://github.com/Balance0014"
+      },
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Balance0014/claude-code-claim-check.git"
+      },
+      "category": "testing",
+      "homepage": "https://github.com/Balance0014/claude-code-claim-check",
+      "repository": "https://github.com/Balance0014/claude-code-claim-check",
+      "license": "MIT",
+      "keywords": [
+        "claude-code",
+        "hooks",
+        "stop-hook",
+        "verification",
+        "quality",
+        "agents"
+      ],
+      "strict": false
     }
   ]
 }
