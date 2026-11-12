@@ -135,6 +135,8 @@ git clone https://github.com/YOUR_USERNAME/marketplace.git
 cd marketplace
 ```
 
+> **Check your commit email before committing.** Commits record the email in `git config user.email` permanently, and PR commits remain publicly visible on GitHub even after branches are deleted. If you don't want your personal or work email exposed, use GitHub's noreply address: enable **Settings → Emails → Keep my email addresses private** on GitHub (ideally with "Block command line pushes that expose my email"), then run `git config user.email "ID+USERNAME@users.noreply.github.com"` with the address shown on that settings page.
+
 ### 5. Add Your Plugin to marketplace.json
 
 Edit `.claude-plugin/marketplace.json` to add your plugin entry:
