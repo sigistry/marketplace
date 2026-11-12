@@ -19,7 +19,7 @@ import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const METHODOLOGY_VERSION = '1.2';
+const METHODOLOGY_VERSION = '1.3';
 
 const read = (p) => fs.readFileSync(p, 'utf8');
 const exists = (p) => fs.existsSync(p);
@@ -139,6 +139,15 @@ const HOOK_FORBIDDEN = [
 // Python hook scripts get the same standard with Python-shaped detectors.
 // Same four rules as HOOK_FORBIDDEN plus subprocess (Python hooks have no
 // read-only-git allowlist yet; none has needed one).
+//
+// v1.3 scoped-write exception: a hook MAY keep an append-only log at a
+// constant path inside the user's own ~/.claude/<plugin>/ directory. The
+// path must be a source-level literal (no env vars, no config-derived
+// components, nothing a project can influence). Enforced by
+// pyAllowedWriteVars/pyScopedWritesOnly below: the only write sites allowed
+// are `open(<CONST>, 'a', ...)` and `os.makedirs(os.path.dirname(<CONST>),
+// exist_ok=True)` where <CONST> is assigned exactly
+// `os.path.expanduser('~/.claude/...')` and nothing else.
 const PY_HOOK_FORBIDDEN = [
   [/\b(?:import|from)\s+(?:socket|urllib|requests|httpx|aiohttp|http\.client|ftplib|smtplib|telnetlib|xmlrpc)\b/, 'network call'],
   [
@@ -149,6 +158,31 @@ const PY_HOOK_FORBIDDEN = [
   [/\beval\s*\(|\bexec\s*\(|\b(?:import|from)\s+(?:pickle|marshal|importlib)\b|__import__/, 'dynamic code evaluation'],
   [/\b(?:import|from)\s+subprocess\b|\bos\.(?:system|popen|exec\w*|spawn\w*)\s*\(/, 'subprocess'],
 ];
+
+// Constants assigned a single expanduser literal under ~/.claude/, with
+// nothing else on the right-hand side (an env-var fallback disqualifies).
+function pyAllowedWriteVars(src) {
+  return [...src.matchAll(
+    /^[ \t]*([A-Za-z_]\w*)[ \t]*=[ \t]*os\.path\.expanduser\([ \t]*(['"])~\/\.claude\/[^'"]+\2[ \t]*\)[ \t]*(?:#.*)?$/gm
+  )].map((m) => m[1]);
+}
+
+// True when every filesystem-write site in the source is one of the two
+// allowed shapes on an allowed constant. Works by erasing the allowed sites
+// and re-testing the forbidden pattern on what remains.
+function pyScopedWritesOnly(src, writeRe) {
+  let stripped = src;
+  for (const v of pyAllowedWriteVars(src)) {
+    stripped = stripped
+      .replace(new RegExp(`\\bopen\\(\\s*${v}\\s*,\\s*'a'[^)]*\\)`, 'g'), 'ALLOWED_LOG_APPEND')
+      .replace(new RegExp(`\\bopen\\(\\s*${v}\\s*,\\s*"a"[^)]*\\)`, 'g'), 'ALLOWED_LOG_APPEND')
+      .replace(
+        new RegExp(`\\bos\\.makedirs\\(\\s*os\\.path\\.dirname\\(\\s*${v}\\s*\\)\\s*,\\s*exist_ok\\s*=\\s*True\\s*\\)`, 'g'),
+        'ALLOWED_LOG_MKDIR'
+      );
+  }
+  return !writeRe.test(stripped);
+}
 
 // Subprocess use in a hook is acceptable ONLY for constant, read-only git
 // introspection (the common "gather git context" pattern). Anything dynamic,
@@ -183,6 +217,7 @@ function checkHookSafety(pluginDir) {
   const hj = path.join(pluginDir, 'hooks', 'hooks.json');
   if (!exists(hj)) return { status: 'n/a', detail: 'no hooks' };
   const problems = [];
+  const scopedLogs = [];
   let config;
   try {
     config = JSON.parse(read(hj));
@@ -203,7 +238,12 @@ function checkHookSafety(pluginDir) {
     if (rel.endsWith('.py')) {
       // Python hook: same standard, Python-shaped detectors (see PY_HOOK_FORBIDDEN).
       for (const [re, label] of PY_HOOK_FORBIDDEN) {
-        if (re.test(src)) problems.push(`${rel}: ${label}`);
+        if (!re.test(src)) continue;
+        if (label === 'filesystem write' && pyScopedWritesOnly(src, re)) {
+          scopedLogs.push(rel); // v1.3: constant append-only log under ~/.claude/
+          continue;
+        }
+        problems.push(`${rel}: ${label}`);
       }
       // Fail-safe: a bare except guarding the verdict path, and sys.exit of 0,
       // a variable, or a function result (`sys.exit(main(sys.argv))`).
@@ -226,7 +266,11 @@ function checkHookSafety(pluginDir) {
     ? { status: 'fail', detail: problems.join('; ') }
     : {
         status: 'pass',
-        detail: `${scripts.length} hook script(s): advisory-only, no network, no fs writes, no credential access, subprocess (if any) limited to constant read-only git commands, fail-safe exit(0)`,
+        detail:
+          `${scripts.length} hook script(s): advisory-only, no network, no fs writes, no credential access, subprocess (if any) limited to constant read-only git commands, fail-safe exit(0)` +
+          (scopedLogs.length
+            ? `; scoped append-only audit log under ~/.claude/ allowed per methodology v1.3 (${scopedLogs.join(', ')})`
+            : ''),
       };
 }
 
