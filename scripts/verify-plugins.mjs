@@ -136,6 +136,20 @@ const HOOK_FORBIDDEN = [
   [/\beval\s*\(|\bFunction\s*\(/, 'dynamic code evaluation'],
 ];
 
+// Python hook scripts get the same standard with Python-shaped detectors.
+// Same four rules as HOOK_FORBIDDEN plus subprocess (Python hooks have no
+// read-only-git allowlist yet; none has needed one).
+const PY_HOOK_FORBIDDEN = [
+  [/\b(?:import|from)\s+(?:socket|urllib|requests|httpx|aiohttp|http\.client|ftplib|smtplib|telnetlib|xmlrpc)\b/, 'network call'],
+  [
+    /\bopen\s*\([^)]*,\s*(?:mode\s*=\s*)?['"][^'"]*[wax+][^'"]*['"]|\bos\.(?:remove|unlink|rename|replace|rmdir|makedirs|mkdir|chmod|symlink|link|truncate)\s*\(|\bshutil\.\w+\s*\(|\.(?:write_text|write_bytes|unlink|touch|mkdir|rename|symlink_to)\s*\(/,
+    'filesystem write',
+  ],
+  [/(?<!process)(?<!import\.meta)\.env\b|\bid_rsa\b|\.aws\b|credentials/i, 'credential/env access'],
+  [/\beval\s*\(|\bexec\s*\(|\b(?:import|from)\s+(?:pickle|marshal|importlib)\b|__import__/, 'dynamic code evaluation'],
+  [/\b(?:import|from)\s+subprocess\b|\bos\.(?:system|popen|exec\w*|spawn\w*)\s*\(/, 'subprocess'],
+];
+
 // Subprocess use in a hook is acceptable ONLY for constant, read-only git
 // introspection (the common "gather git context" pattern). Anything dynamic,
 // non-git, or write-capable fails.
@@ -186,6 +200,18 @@ function checkHookSafety(pluginDir) {
       continue;
     }
     const src = read(sp);
+    if (rel.endsWith('.py')) {
+      // Python hook: same standard, Python-shaped detectors (see PY_HOOK_FORBIDDEN).
+      for (const [re, label] of PY_HOOK_FORBIDDEN) {
+        if (re.test(src)) problems.push(`${rel}: ${label}`);
+      }
+      // Fail-safe: a bare except guarding the verdict path, and sys.exit of 0,
+      // a variable, or a function result (`sys.exit(main(sys.argv))`).
+      if (!/sys\.exit\(\s*(?:0|[A-Za-z_]\w*(?:\([^()]*\))?)\s*\)/.test(src))
+        problems.push(`${rel}: no unconditional exit(0) fail-safe`);
+      if (!/\bexcept\b/.test(src)) problems.push(`${rel}: no try/except fail-safe`);
+      continue;
+    }
     for (const [re, label] of HOOK_FORBIDDEN) {
       if (re.test(src)) problems.push(`${rel}: ${label}`);
     }
