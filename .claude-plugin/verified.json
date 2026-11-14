@@ -1646,12 +1646,12 @@
       ]
     },
     "claim-check": {
-      "status": "verified",
+      "status": "stale",
       "hosting": "external",
       "repo": "Balance0014/claude-code-claim-check",
       "commit": "bea34c371d4122d2885e74af0dd84ef02fbefc4a",
       "path": ".",
-      "headCommit": "bea34c371d4122d2885e74af0dd84ef02fbefc4a",
+      "headCommit": "f73d752d63a892a177c2016250c4c6f4d808804d",
       "version": "0.5.1",
       "date": "2026-11-12",
       "firstSeen": "2026-11-12",
