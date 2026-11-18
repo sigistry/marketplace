@@ -1,0 +1,26 @@
+{
+  "name": "romeo-seo",
+  "version": "3.0.0",
+  "description": "50 free SEO, AEO, LLM SEO and GEO skills from RomeoSEO: technical and on-page audits, keyword research, briefs, writing, schema, AI search visibility with optional DataForSEO tracking, parasite SEO, local and e-commerce.",
+  "author": {
+    "name": "RomeoSEO",
+    "url": "https://romeoseo.com"
+  },
+  "homepage": "https://romeoseo.com/skills",
+  "repository": "https://github.com/RomeoSEO/seo-skills",
+  "license": "MIT",
+  "keywords": [
+    "seo",
+    "aeo",
+    "geo",
+    "llm-seo",
+    "ai-search",
+    "technical-seo",
+    "keyword-research",
+    "schema",
+    "parasite-seo",
+    "dataforseo",
+    "local-seo",
+    "ecommerce"
+  ]
+}

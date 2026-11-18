@@ -1011,13 +1011,7 @@
     },
     {
       "name": "romeo-seo",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/RomeoSEO/seo-skills.git",
-        "path": ".",
-        "ref": "main",
-        "sha": "e2fed0c2e1c53840f0f04d0c6868d3931f2e7bea"
-      },
+      "source": "./plugins/romeo-seo",
       "description": "50 free SEO and AI search skills for audits, keyword research, content, schema, and publishing workflows. Optional DataForSEO tracking requires a separate account.",
       "version": "3.0.0",
       "author": {
@@ -1035,7 +1029,7 @@
         "ai-search",
         "romeoseo"
       ],
-      "strict": false
+      "strict": true
     }
   ]
 }
