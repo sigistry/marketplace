@@ -1030,6 +1030,36 @@
         "romeoseo"
       ],
       "strict": true
+    },
+    {
+      "name": "datacircle",
+      "description": "Find the best GTM APIs. A skill that calls Datacircle's open API, free with no key: list every API, see who is best for each and search every plan, at api.datacircle.dev/v1.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Datacircle",
+        "url": "https://datacircle.dev"
+      },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/waynehamadi/claude-code-datacircle.git",
+        "path": "plugins/datacircle",
+        "ref": "main",
+        "sha": "b97b1a5b2cb6b45ebe3f88ad55ffbdbcbd66ef66"
+      },
+      "category": "api",
+      "homepage": "https://datacircle.dev",
+      "repository": "https://github.com/waynehamadi/claude-code-datacircle",
+      "license": "MIT",
+      "keywords": [
+        "gtm",
+        "api",
+        "pricing",
+        "benchmark",
+        "email-finder",
+        "enrichment",
+        "linkedin"
+      ],
+      "strict": false
     }
   ]
 }
