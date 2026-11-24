@@ -1060,6 +1060,132 @@
         "linkedin"
       ],
       "strict": false
+    },
+    {
+      "name": "writing-editor",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/dougkeiller/writing-editor.git"
+      },
+      "description": "An edit-only writing editor: diagrams your draft as a Minto pyramid, checks BLUF and the argument, asks questions and proposes tracked edits. It never writes a new draft.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Doug Keiller",
+        "url": "https://github.com/dougkeiller"
+      },
+      "repository": "https://github.com/dougkeiller/writing-editor",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "editing",
+        "minto",
+        "bluf",
+        "critical-thinking"
+      ],
+      "category": "documentation",
+      "strict": false
+    },
+    {
+      "name": "reasoning-toolkit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/dougkeiller/reasoning-toolkit.git"
+      },
+      "description": "Eight structured reasoning methods that force rigour rather than describe it: independent-subagent perspectives, solver-backed logic, and real sensitivity analysis.",
+      "version": "0.3.0",
+      "author": {
+        "name": "Doug Keiller",
+        "url": "https://github.com/dougkeiller"
+      },
+      "repository": "https://github.com/dougkeiller/reasoning-toolkit",
+      "license": "MIT",
+      "keywords": [
+        "reasoning",
+        "decision-making",
+        "pre-mortem",
+        "post-mortem",
+        "critical-thinking"
+      ],
+      "category": "analysis",
+      "strict": false
+    },
+    {
+      "name": "research-toolkit",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/dougkeiller/research-toolkit.git"
+      },
+      "description": "One research plugin, Exa-first: a single entry point that picks one of six modes (Lookup, Sweep, Verify, Enumerate, Deep, Watch), enforces the human stops between the long-list, the scored cut and verification, and writes a dated note. Carries the whole Exa surface plus a source map for everything else.",
+      "version": "1.4.0",
+      "author": {
+        "name": "Doug Keiller",
+        "url": "https://github.com/dougkeiller"
+      },
+      "repository": "https://github.com/dougkeiller/research-toolkit",
+      "license": "MIT",
+      "keywords": [
+        "research",
+        "exa",
+        "search",
+        "monitors",
+        "deep-search",
+        "agent",
+        "citations",
+        "long-list"
+      ],
+      "category": "analysis",
+      "strict": false
+    },
+    {
+      "name": "gtm-strategy",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/dougkeiller/gtm-strategy.git"
+      },
+      "description": "Evidence-graded go-to-market strategy for early-stage B2B companies: four parallel research agents, a synthetic buyer-panel pretest and a synthesis with built-in review.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Doug Keiller",
+        "url": "https://github.com/dougkeiller"
+      },
+      "repository": "https://github.com/dougkeiller/gtm-strategy",
+      "license": "MIT",
+      "keywords": [
+        "go-to-market",
+        "gtm",
+        "strategy",
+        "positioning",
+        "pricing",
+        "b2b",
+        "startups",
+        "agents"
+      ],
+      "category": "analysis",
+      "strict": false
+    },
+    {
+      "name": "self-moa",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/dougkeiller/self-moa.git"
+      },
+      "description": "Mixture of agents with Claude only: three independent Claude drafts in parallel, combined by Claude into one answer showing agreement and disagreement. Blind-tested against a mixed-provider panel.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Doug Keiller",
+        "url": "https://github.com/dougkeiller"
+      },
+      "repository": "https://github.com/dougkeiller/self-moa",
+      "license": "MIT",
+      "keywords": [
+        "mixture-of-agents",
+        "moa",
+        "self-moa",
+        "critical-thinking",
+        "review"
+      ],
+      "category": "ai",
+      "strict": false
     }
   ]
 }
