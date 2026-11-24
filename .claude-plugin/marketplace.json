@@ -1064,8 +1064,10 @@
     {
       "name": "writing-editor",
       "source": {
-        "source": "url",
-        "url": "https://github.com/dougkeiller/writing-editor.git"
+        "source": "git-subdir",
+        "url": "https://github.com/dougkeiller/writing-editor.git",
+        "path": "plugin",
+        "ref": "main"
       },
       "description": "An edit-only writing editor: diagrams your draft as a Minto pyramid, checks BLUF and the argument, asks questions and proposes tracked edits. It never writes a new draft.",
       "version": "0.1.0",
@@ -1088,8 +1090,10 @@
     {
       "name": "reasoning-toolkit",
       "source": {
-        "source": "url",
-        "url": "https://github.com/dougkeiller/reasoning-toolkit.git"
+        "source": "git-subdir",
+        "url": "https://github.com/dougkeiller/reasoning-toolkit.git",
+        "path": "plugin",
+        "ref": "main"
       },
       "description": "Eight structured reasoning methods that force rigour rather than describe it: independent-subagent perspectives, solver-backed logic, and real sensitivity analysis.",
       "version": "0.3.0",
@@ -1112,8 +1116,10 @@
     {
       "name": "research-toolkit",
       "source": {
-        "source": "url",
-        "url": "https://github.com/dougkeiller/research-toolkit.git"
+        "source": "git-subdir",
+        "url": "https://github.com/dougkeiller/research-toolkit.git",
+        "path": "plugin",
+        "ref": "main"
       },
       "description": "One research plugin, Exa-first: a single entry point that picks one of six modes (Lookup, Sweep, Verify, Enumerate, Deep, Watch), enforces the human stops between the long-list, the scored cut and verification, and writes a dated note. Carries the whole Exa surface plus a source map for everything else.",
       "version": "1.4.0",
@@ -1139,8 +1145,10 @@
     {
       "name": "gtm-strategy",
       "source": {
-        "source": "url",
-        "url": "https://github.com/dougkeiller/gtm-strategy.git"
+        "source": "git-subdir",
+        "url": "https://github.com/dougkeiller/gtm-strategy.git",
+        "path": "plugin",
+        "ref": "main"
       },
       "description": "Evidence-graded go-to-market strategy for early-stage B2B companies: four parallel research agents, a synthetic buyer-panel pretest and a synthesis with built-in review.",
       "version": "1.0.0",
@@ -1166,8 +1174,10 @@
     {
       "name": "self-moa",
       "source": {
-        "source": "url",
-        "url": "https://github.com/dougkeiller/self-moa.git"
+        "source": "git-subdir",
+        "url": "https://github.com/dougkeiller/self-moa.git",
+        "path": "plugin",
+        "ref": "main"
       },
       "description": "Mixture of agents with Claude only: three independent Claude drafts in parallel, combined by Claude into one answer showing agreement and disagreement. Blind-tested against a mixed-provider panel.",
       "version": "0.1.0",
